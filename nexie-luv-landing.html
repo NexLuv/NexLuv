@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexie Luv | NexLuv.com</title>
+    <style>
+        /* Barbie Theme Colors */
+        :root {
+            --barbie-pink: #FF69B4;
+            --barbie-light-pink: #FFB6C1;
+            --barbie-hot-pink: #FF1493;
+            --barbie-white: #FFF0F5;
+            --barbie-accent: #FF40FF;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--barbie-white);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-image: linear-gradient(45deg, var(--barbie-light-pink) 0%, var(--barbie-white) 100%);
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            margin: 2rem auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            border: 3px solid var(--barbie-pink);
+        }
+        
+        .profile {
+            margin-bottom: 2rem;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--barbie-hot-pink);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin: 1rem 0;
+            color: var(--barbie-hot-pink);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bio {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .link-item {
+            background-color: var(--barbie-pink);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .link-item:hover {
+            background-color: var(--barbie-hot-pink);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .link-item i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+        
+        footer {
+            margin-top: auto;
+            padding: 1rem;
+            text-align: center;
+            color: var(--barbie-hot-pink);
+            font-size: 0.9rem;
+        }
+        
+        /* Barbie-themed decorations */
+        .decoration {
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .hearts {
+            top: 10%;
+            left: 5%;
+            font-size: 3rem;
+            color: var(--barbie-accent);
+            opacity: 0.5;
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .stars {
+            bottom: 15%;
+            right: 8%;
+            font-size: 3rem;
+            color: var(--barbie-hot-pink);
+            opacity: 0.5;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .link-item {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Barbie decorations -->
+    <div class="decoration hearts">♥ ♡</div>
+    <div class="decoration stars">★ ☆</div>
+    
+    <div class="container">
+        <div class="profile">
+            <img src="/api/placeholder/400/400" alt="Nexie Luv" class="profile-img">
+            <h1>Nexie Luv</h1>
+            <p class="bio">Hiiii babes! 💋<br>
+            It's your favorite blonde bimbo Nexie!<br>
+            Come play with me in my pink fantasy world...<br>
+            This bimbo loves to have fun & can't wait to see you! 😘✨</p>
+        </div>
+        
+        <div class="links">
+            <a href="https://onlyfans.com/" class="link-item">
+                <i class="fas fa-heart"></i> OnlyFans
+            </a>
+            <a href="https://fansly.com/" class="link-item">
+                <i class="fas fa-star"></i> Fansly
+            </a>
+            <a href="https://instagram.com/" class="link-item">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://tiktok.com/" class="link-item">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+            <a href="https://twitter.com/" class="link-item">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://reddit.com/" class="link-item">
+                <i class="fab fa-reddit"></i> Reddit
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2025 Nexie Luv | NexLuv.com | Made with 💋
+    </footer>
+</body>
+</html>
