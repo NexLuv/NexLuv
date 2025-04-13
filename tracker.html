@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feminizing Workout, Skincare & Fasting Tracker</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to right, #f9a8d4, #e9d5ff); /* Pink to lavender gradient */
+            min-height: 100vh; /* Ensure background covers full height */
+        }
+        /* Main container styling */
+        .container {
+            max-width: 800px;
+            margin: 20px auto; /* Center the container with margin */
+            background: white;
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Subtle shadow */
+            overflow: hidden; /* Keep content within rounded corners */
+        }
+        /* Header styling */
+        .header {
+            background: linear-gradient(to right, #ec4899, #a855f7); /* Pink to purple gradient */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .today-info {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        .recommendation {
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+        /* Main section tabs (Skincare/Workout/Fasting) */
+        .main-tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb; /* Light gray border */
+        }
+        .main-tab {
+            flex: 1; /* Equal width */
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            background: white;
+            color: #9ca3af; /* Gray text */
+            transition: background-color 0.2s, color 0.2s; /* Smooth transition */
+        }
+        .main-tab.active {
+            background: #fdf2f8; /* Light pink background */
+            color: #be185d; /* Dark pink text */
+            border-bottom: 3px solid #be185d; /* Pink underline */
+        }
+        /* Specific active style for Fasting tab */
+         .main-tab#fasting-main-tab.active {
+            background: #f0fdf4; /* Light green background */
+            color: #166534; /* Dark green text */
+            border-bottom-color: #166534; /* Green underline */
+        }
+        /* Skincare routine tabs (Morning/Evening) */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .tab.active-morning {
+            background-color: #fef3c7; /* Light yellow */
+            color: #b45309; /* Dark yellow/brown */
+        }
+        .tab.inactive {
+            background-color: white;
+            color: #9ca3af; /* Gray text */
+        }
+        .tab.active-evening {
+            background-color: #e0e7ff; /* Light blue */
+            color: #4f46e5; /* Dark blue/purple */
+        }
+        /* Workout day tabs */
+        .workout-tabs {
+            display: flex;
+            flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .workout-tab {
+            flex-basis: 14.28%; /* Roughly 1/7th width */
+            flex-grow: 1; /* Allow tabs to grow to fill space */
+            padding: 10px 5px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            background-color: white;
+            color: #9ca3af;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .workout-tab.active {
+            background-color: #ede9fe; /* Light purple */
+            color: #6d28d9; /* Dark purple */
+            border-bottom: 3px solid #6d28d9; /* Purple underline */
+        }
+        /* Routine content styling */
+        .routine {
+            padding: 20px;
+        }
+        .routine-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #6d28d9; /* Dark purple */
+        }
+        /* Evening treatment buttons */
+        .treatment-buttons {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            margin-bottom: 10px;
+        }
+        .treatment-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #a78bfa; /* Light purple border */
+            border-radius: 20px; /* Pill shape */
+            background: white;
+            color: #7c3aed; /* Purple text */
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .treatment-btn.active {
+            background: #8b5cf6; /* Medium purple background */
+            color: white;
+        }
+        /* Schedule info styling */
+        .schedule-info {
+            font-size: 13px;
+            color: #6b7280; /* Medium gray */
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping */
+            gap: 10px;
+        }
+        .schedule-item {
+            padding: 6px 10px;
+            border-radius: 15px; /* Rounded pill shape */
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        .schedule-item.highlighted {
+            background-color: #dbeafe; /* Light blue background */
+            font-weight: bold;
+        }
+        /* Step styling (for skincare and workout items) */
+        .step {
+            background-color: #f5f3ff; /* Very light purple */
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .step-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #d1d5db; /* Light gray border */
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white; /* Checkmark color */
+            transition: background-color 0.2s, border-color 0.2s;
+            flex-shrink: 0; /* Prevent checkbox from shrinking */
+        }
+        .step-checkbox.checked {
+            background-color: #22c55e; /* Green background when checked */
+            border-color: #22c55e; /* Green border */
+        }
+        .step-title {
+            font-weight: bold;
+            flex-grow: 1; /* Allow title to take available space */
+        }
+        .step-time {
+            font-size: 12px;
+            color: #6b7280;
+            margin-left: 10px;
+            white-space: nowrap; /* Prevent time from wrapping */
+        }
+        /* Product details styling */
+        .product-details {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 5px;
+            padding-left: 30px; /* Indent details under checkbox */
+        }
+        .product-name {
+            color: #111827; /* Dark gray/black */
+        }
+        /* Progress bar section (Main progress for Skincare/Workout) */
+        .progress-section {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .progress-bar-container {
+            height: 10px;
+            background-color: #e5e7eb; /* Gray background */
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #ec4899, #a855f7); /* Pink to purple gradient */
+            transition: width 0.3s ease-in-out; /* Smooth width transition */
+            width: 0%; /* Initial width */
+        }
+        /* Workout section specific styling */
+        .workout-section {
+            padding: 15px;
+        }
+        .workout-time {
+            background-color: #f3f4f6; /* Light gray background for time blocks */
+            padding: 15px; /* Increased padding */
+            border-radius: 8px; /* Match step radius */
+            margin-bottom: 15px;
+        }
+        .workout-time-title {
+            font-weight: bold;
+            color: #4b5563; /* Darker gray */
+            margin-bottom: 10px; /* Increased margin */
+            display: flex;
+            align-items: center;
+            font-size: 16px; /* Slightly larger title */
+        }
+        .workout-time-title::before {
+            content: "⏰"; /* Clock emoji */
+            margin-right: 8px; /* Increased spacing */
+            font-size: 18px;
+        }
+        /* Style for Evening workout titles specifically */
+        .evening-workout-container > .workout-time-title::before {
+            content: "🌙"; /* Moon emoji for evening */
+        }
+        .workout-exercise {
+            margin-bottom: 10px;
+            padding-left: 0; /* Remove old padding */
+            position: relative;
+        }
+         /* Remove the bullet point pseudo-element */
+        .workout-exercise::before { content: none; }
+        /* Utility class to hide elements */
+        .hidden { display: none !important; }
+        /* Notice text at the bottom */
+        .notice {
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            padding: 10px;
+            background-color: #f9fafb; /* Very light gray */
+            border-top: 1px solid #e5e7eb;
+        }
+        /* Heart emoji styling */
+        .heart { color: #ec4899; }
+        /* Active/inactive content sections */
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+        .workout-content { display: none; }
+        .workout-content.active { display: block; }
+        /* Objective box styling */
+        .objective {
+            background-color: #fef3c7;
+            padding: 10px 15px;
+            margin: 0 15px 15px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            border: 1px solid #fde68a;
+        }
+        /* Workout Location Toggle Styles */
+        .location-toggle { display: flex; gap: 8px; margin-bottom: 15px; margin-top: -5px; }
+        .toggle-option {
+            flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 15px;
+            background: #e5e7eb; color: #4b5563; cursor: pointer; text-align: center;
+            font-size: 13px; font-weight: bold; transition: all 0.2s;
+        }
+        .toggle-option.active { background: #8b5cf6; color: white; border-color: #7c3aed; }
+        /* Workout Exercise Blocks Styles */
+        .exercise-block { padding-top: 10px; border-top: 1px dashed #d1d5db; margin-top: 10px; }
+        .exercise-block.hidden { display: none; }
+        .exercise-block.active { display: block; }
+
+        /* --- Fasting Section Styles --- */
+        #fasting-section { padding: 20px; }
+        .fasting-controls { margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .fasting-btn {
+            padding: 10px 15px; border: 1px solid #16a34a; /* Green border */
+            border-radius: 20px; background: white; color: #15803d; /* Dark Green */
+            cursor: pointer; font-weight: bold; transition: all 0.2s;
+        }
+        .fasting-btn.active, .fasting-btn:hover { background: #dcfce7; /* Light Green */ }
+        .fasting-btn#start-fast-btn { border-color: #16a34a; color: #15803d; } /* Start button green */
+        .fasting-btn#end-fast-btn { border-color: #dc2626; color: #b91c1c; } /* End button red */
+        .fasting-btn#start-fast-btn:hover { background: #dcfce7; }
+        .fasting-btn#end-fast-btn:hover { background: #fee2e2; } /* Light red hover */
+        .fasting-btn:disabled { background: #f3f4f6; color: #9ca3af; border-color: #d1d5db; cursor: not-allowed; }
+
+        .fasting-status {
+            background-color: #f0fdf4; /* Light green */
+            border: 1px solid #86efac; /* Green border */
+            padding: 15px; border-radius: 8px; margin-bottom: 20px;
+        }
+        .fasting-status-title { font-weight: bold; margin-bottom: 8px; color: #14532d; /* Darker green */ font-size: 18px; }
+        .fasting-status-details p { margin: 4px 0; font-size: 14px; color: #166534; }
+        .fasting-status-details strong { color: #15803d; }
+
+        .fasting-progress-bar-container {
+            height: 12px; background-color: #e5e7eb; border-radius: 6px;
+            overflow: hidden; margin-top: 10px;
+        }
+        .fasting-progress-bar {
+            height: 100%; background: linear-gradient(to right, #4ade80, #22c55e); /* Green gradient */
+            transition: width 0.5s ease-in-out; width: 0%; border-radius: 6px;
+        }
+        /* Style for eating window */
+        .fasting-status.eating-window { background-color: #fefce8; border-color: #fef08a; } /* Light yellow */
+        .fasting-status.eating-window .fasting-status-title { color: #854d0e; }
+        .fasting-status.eating-window .fasting-status-details p { color: #a16207; }
+        .fasting-status.eating-window .fasting-status-details strong { color: #854d0e; }
+        .fasting-status.eating-window .fasting-progress-bar { background: linear-gradient(to right, #fde047, #facc15); } /* Yellow gradient */
+
+         /* Style for idle state */
+        .fasting-status.idle-window { background-color: #f1f5f9; border-color: #e2e8f0; } /* Light gray */
+        .fasting-status.idle-window .fasting-status-title { color: #475569; }
+        .fasting-status.idle-window .fasting-status-details p { color: #64748b; }
+        .fasting-status.idle-window .fasting-status-details strong { color: #475569; }
+        .fasting-status.idle-window .fasting-progress-bar { background: #cbd5e1; } /* Gray */
+
+        /* --- History Section Styles --- */
+         #history-toggle-section {
+             text-align: center;
+             padding: 15px;
+             border-top: 1px solid #e5e7eb;
+             background-color: #f9fafb; /* Match notice background */
+         }
+         .history-btn {
+             padding: 8px 16px;
+             border: 1px solid #6b7280;
+             border-radius: 20px;
+             background-color: white;
+             color: #4b5563;
+             cursor: pointer;
+             font-weight: bold;
+             transition: all 0.2s;
+             margin-left: 10px; /* Add space if next to date input */
+         }
+         .history-btn:hover {
+             background-color: #f3f4f6;
+         }
+         #history-display-section {
+             padding: 20px;
+             background-color: #f9fafb;
+             border-top: 1px dashed #e5e7eb;
+         }
+         #history-display-section h3 {
+             text-align: center;
+             color: #4b5563;
+             margin-top: 0;
+             margin-bottom: 15px;
+         }
+         #history-display-section p {
+             /*text-align: center; */ /* Let specific history items align */
+             color: #6b7280;
+             margin-bottom: 10px; /* Space between history items */
+         }
+         #history-date-input {
+             padding: 6px 10px;
+             border: 1px solid #ccc;
+             border-radius: 6px;
+             font-size: 14px;
+         }
+        .history-summary-section {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .history-summary-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .history-summary-title {
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 5px;
+        }
+        .history-summary-details {
+            font-size: 14px;
+            color: #4b5563;
+        }
+        .history-fasting-event {
+            font-size: 13px;
+            margin-bottom: 3px;
+            padding-left: 15px;
+            position: relative;
+        }
+         .history-fasting-event::before {
+             content: "•";
+             position: absolute;
+             left: 0;
+             color: #16a34a; /* Green bullet */
+         }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Feminizing Workout, Skincare & Fasting Tracker ✨</h1>
+            <p class="today-info" id="current-date">Loading date...</p>
+            <div class="recommendation" id="today-recommendation">Loading recommendation...</div>
+        </div>
+
+        <div class="main-tabs">
+            <div id="skincare-main-tab" class="main-tab active">💧 Skincare</div>
+            <div id="workout-main-tab" class="main-tab">💪 Workout</div>
+            <div id="fasting-main-tab" class="main-tab">⏳ Fasting</div>
+        </div>
+
+        <div id="main-progress-section" class="progress-section">
+            <div class="progress-header">
+                <span>Daily Task Progress</span>
+                <span id="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+        </div>
+
+        <div id="skincare-section" class="section-content active">
+             <div class="tabs">
+                <div id="morning-tab" class="tab active-morning">☀️ Morning Routine</div>
+                <div id="evening-tab" class="tab inactive">🌙 Evening Routine</div>
+            </div>
+             <div id="morning-routine" class="routine"> <h2 class="routine-title">Morning Routine</h2> <div class="step"> <div class="step-header"> <div id="morning-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">1. Cleanse</div> <div class="step-time">⏱️ 2 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div> <div>Hyaluronic Acid + Ceramides + Niacinamide, Fragrance Free & Paraben Free</div> </div> </div> <div class="step"> <div class="step-header"> <div id="morning-vitaminc" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">2. Vitamin C</div> <div class="step-time">⏱️ 1 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> TruSkin Vitamin C Serum</div> <div>Anti Aging Formula with Vitamin C, Hyaluronic Acid, Vitamin E</div> </div> </div> <div class="step"> <div class="step-header"> <div id="morning-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">3. Moisturize</div> <div class="step-time">⏱️ 1 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> CeraVe Daily Moisturizing Lotion</div> <div>Lightweight, oil-free moisturizer</div> </div> </div> <div class="step"> <div class="step-header"> <div id="morning-sunscreen" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">4. Sunscreen</div> <div class="step-time">⏱️ 1 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> La Roche-Posay Anthelios Clear Skin SPF 60</div> <div>Oil Free Sunscreen, Oil Absorbing, Broad Spectrum SPF + Antioxidants</div> </div> </div> </div>
+             <div id="evening-routine" class="routine hidden"> <h2 class="routine-title">Evening Routine</h2>
+                <div class="treatment-buttons">
+                    <div id="retinoid-btn" class="treatment-btn active">Retinoid</div>
+                    <div id="exfoliant-btn" class="treatment-btn">Exfoliant</div>
+                    <div id="slugging-btn" class="treatment-btn">Slugging</div>
+                </div>
+                <div class="schedule-info"> <div id="retinoid-schedule" class="schedule-item">Retinoid: Mon, Wed, Fri</div> <div id="exfoliant-schedule" class="schedule-item">Exfoliant: Tue, Thu</div> <div id="slugging-schedule" class="schedule-item">Slugging: Sat, Sun</div> </div>
+                <div class="step"> <div class="step-header"> <div id="evening-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">1. Cleanse</div> <div class="step-time">⏱️ 2 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div> </div> </div>
+                <div id="retinoid-step" class="step"> <div class="step-header"> <div id="evening-treatment" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">2. Treatment (Retinoid)</div> <div class="step-time">⏱️ 2-3 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> DiJerin Adapalene Gel (0.1%)</div> </div> </div>
+                <div id="exfoliant-step" class="step hidden"> <div class="step-header"> <div id="evening-treatment-exfoliant" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">2. Treatment (Exfoliant)</div> <div class="step-time">⏱️ 2 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> The Ordinary Glycolic Acid 7% Toner</div> </div> </div>
+                <div id="slugging-step" class="step hidden"> <div class="step-header"> <div id="evening-treatment-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">2. Treatment (Slugging Night)</div> <div class="step-time">⏱️ 1 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> No actives tonight</div> <div>Pure hydration night for skin barrier repair</div> </div> </div>
+                <div class="step"> <div class="step-header"> <div id="evening-hydration" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">3. Hydration</div> <div class="step-time">⏱️ 1-2 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> The Ordinary Hyaluronic Acid 2% + B5</div> </div> </div>
+                <div class="step"> <div class="step-header"> <div id="evening-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">4. Moisturize</div> <div class="step-time">⏱️ 2 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> CeraVe PM Facial Moisturizing Lotion</div> </div> </div>
+                <div id="evening-slug" class="step hidden"> <div class="step-header"> <div id="evening-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">5. Slug & Sleep</div> <div class="step-time">⏱️ 2 min</div> </div> <div class="product-details"> <div class="product-name"><span class="heart">💖</span> Vaseline (petroleum jelly) + Silk/Satin Sleep Mask</div> </div> </div>
+             </div>
+        </div>
+
+        <div id="workout-section" class="section-content">
+             <div class="workout-tabs">
+                 <div id="monday-tab" class="workout-tab">Mon</div>
+                 <div id="tuesday-tab" class="workout-tab">Tue</div>
+                 <div id="wednesday-tab" class="workout-tab">Wed</div>
+                 <div id="thursday-tab" class="workout-tab">Thu</div>
+                 <div id="friday-tab" class="workout-tab">Fri</div>
+                 <div id="saturday-tab" class="workout-tab">Sat</div>
+                 <div id="sunday-tab" class="workout-tab">Sun</div>
+             </div>
+             <div class="objective"> <strong>Feminizing Workout Plan Objective:</strong> Lower body development, waist slimming, no upper body activation </div>
+             <div id="monday-workout" class="workout-content"> <div class="workout-section"> <h2 class="routine-title">Monday – Glute Emphasis & Waist Sculpting</h2> <div class="workout-time"> <div class="workout-time-title">Lunch Workout</div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-lunch-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Glute bridges (with pad & band): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-lunch-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Donkey kicks (ankle weights): 3 x 15 per leg</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-lunch-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Clamshells (Renoj band): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-lunch-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Lying side leg lifts (Pilates band): 3 x 20 per side</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-lunch-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stomach vacuums: 3 x 30 sec</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-lunch-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Light walk (waist trainer optional): 5–10 mins</div> </div> </div> </div>
+                <div class="workout-time evening-workout-container"> <div class="workout-time-title">Evening Workout</div> <div class="location-toggle"> <div id="monday-toggle-gym" class="toggle-option active">📍 Gym</div> <div id="monday-toggle-home" class="toggle-option">🏠 Home</div> </div> <div id="monday-gym-exercises" class="exercise-block active"> <div class="workout-exercise"> <div class="step-header"> <div id="monday-evening-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Hip thrusts (belted, moderate weight): 4 x 12</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-evening-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Cable or band kickbacks: 3 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-evening-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">StairMaster: 30 min steady pace</div> </div> </div> </div> <div id="monday-home-exercises" class="exercise-block hidden"> <div class="workout-exercise"> <div class="step-header"> <div id="monday-evening-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Dumbbell hip thrusts (belted): 4 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-evening-home-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Standing cable kickbacks (door anchor): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="monday-evening-home-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Treadmill incline walk: 30 min</div> </div> </div> </div> </div>
+             </div> </div>
+             <div id="tuesday-workout" class="workout-content"> <div class="workout-section"> <h2 class="routine-title">Tuesday – Thigh Toning & Inner Thigh Isolation</h2> <div class="workout-time"> <div class="workout-time-title">Lunch Workout</div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-lunch-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Resistance band squats: 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-lunch-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Fire hydrants (ankle weights): 3 x 15 per leg</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-lunch-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Standing inner thigh pulses (Pilates band): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-lunch-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Side-lying adductor raises: 3 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-lunch-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stomach vacuums: 3 x 30 sec</div> </div> </div> </div>
+                <div class="workout-time evening-workout-container"> <div class="workout-time-title">Evening Workout</div> <div class="location-toggle"> <div id="tuesday-toggle-gym" class="toggle-option active">📍 Gym</div> <div id="tuesday-toggle-home" class="toggle-option">🏠 Home</div> </div> <div id="tuesday-gym-exercises" class="exercise-block active"> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-evening-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Incline treadmill walk: 30 min</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-evening-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Light leg curl machine: 3 x 12</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-evening-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stretch and foam roll</div> </div> </div> </div> <div id="tuesday-home-exercises" class="exercise-block hidden"> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-evening-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Treadmill incline walk: 30 min</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-evening-home-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Resistance band hamstring curls (lying): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="tuesday-evening-home-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Full-body foam roll</div> </div> </div> </div> </div>
+             </div> </div>
+             <div id="wednesday-workout" class="workout-content"> <div class="workout-section"> <h2 class="routine-title">Wednesday – Full Lower Body Sculpt</h2> <div class="workout-time"> <div class="workout-time-title">Lunch Workout</div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-lunch-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Monster walks (band): 20 steps x 2</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-lunch-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Glute bridges with pause: 3 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-lunch-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Sumo squats (banded): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-lunch-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Standing kickbacks: 3 x 15 per leg</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-lunch-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stomach vacuums: 3 x 30 sec</div> </div> </div> </div>
+                <div class="workout-time evening-workout-container"> <div class="workout-time-title">Evening Workout</div> <div class="location-toggle"> <div id="wednesday-toggle-gym" class="toggle-option active">📍 Gym</div> <div id="wednesday-toggle-home" class="toggle-option">🏠 Home</div> </div> <div id="wednesday-gym-exercises" class="exercise-block active"> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Smith machine glute-biased squats: 3 x 12</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Romanian deadlifts (light dumbbells): 3 x 10</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Bulgarian split squats (bodyweight or Smith): 3 x 10 per leg</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-gym-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">StairMaster: 20 min</div> </div> </div> </div> <div id="wednesday-home-exercises" class="exercise-block hidden"> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Banded sumo squats: 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-home-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Dumbbell Romanian deadlifts: 3 x 10</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-home-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Rear-foot elevated split squats (bench): 3 x 10</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="wednesday-evening-home-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Treadmill incline walk: 25–30 min</div> </div> </div> </div> </div>
+             </div> </div>
+             <div id="thursday-workout" class="workout-content"> <div class="workout-section"> <h2 class="routine-title">Thursday – Recovery & Waist Training</h2> <div class="workout-time"> <div class="workout-time-title">Lunch Workout</div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-lunch-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Waist trainer walk: 10 min</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-lunch-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stomach vacuums: 3 x 30 sec</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-lunch-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Side-lying leg sweeps (Pilates band): 3 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-lunch-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Glute bridges (light resistance): 2 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-lunch-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Band-assisted side stretches</div> </div> </div> </div>
+                <div class="workout-time evening-workout-container"> <div class="workout-time-title">Evening Workout</div> <div class="location-toggle"> <div id="thursday-toggle-gym" class="toggle-option active">📍 Gym</div> <div id="thursday-toggle-home" class="toggle-option">🏠 Home</div> </div> <div id="thursday-gym-exercises" class="exercise-block active"> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-evening-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Yoga, sauna, or stretch session</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-evening-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Flat treadmill walk: 20 min</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-evening-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Foam roll lower body</div> </div> </div> </div> <div id="thursday-home-exercises" class="exercise-block hidden"> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-evening-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Gentle yoga flow (10-15 min)</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-evening-home-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Epsom salt bath</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="thursday-evening-home-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Light stretching session</div> </div> </div> </div> </div>
+             </div> </div>
+             <div id="friday-workout" class="workout-content"> <div class="workout-section"> <h2 class="routine-title">Friday – Max Glute Volume</h2> <div class="workout-time"> <div class="workout-time-title">Lunch Workout</div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-lunch-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Fire hydrants (ankle weights): 3 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-lunch-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Donkey kicks (hold top): 3 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-lunch-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Sumo pulses (banded): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-lunch-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Side steps (banded): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-lunch-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stomach vacuums: 3 x 30 sec</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-lunch-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Light walk (waist trainer optional): 5 min</div> </div> </div> </div>
+                <div class="workout-time evening-workout-container"> <div class="workout-time-title">Evening Workout</div> <div class="location-toggle"> <div id="friday-toggle-gym" class="toggle-option active">📍 Gym</div> <div id="friday-toggle-home" class="toggle-option">🏠 Home</div> </div> <div id="friday-gym-exercises" class="exercise-block active"> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Heavy hip thrusts (belted): 4 x 10</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Kickback machine or cable: 3 x 15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Walking lunges: 3 x 15 per leg</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-gym-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">StairMaster: 30 min</div> </div> </div> </div> <div id="friday-home-exercises" class="exercise-block hidden"> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Dumbbell hip thrusts (belted): 4 x 12</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-home-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Standing band kickbacks: 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-home-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Walking lunges (bodyweight): 3 x 20</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="friday-evening-home-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Treadmill: 30 min walk</div> </div> </div> </div> </div>
+             </div> </div>
+             <div id="saturday-workout" class="workout-content"> <div class="workout-section"> <h2 class="routine-title">Saturday – Cardio & Light Sculpt</h2> <div class="workout-time"> <div class="workout-time-title">Lunch Workout</div> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-lunch-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Dance cardio (e.g. Zumba, jump rope): 25–30 min</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-lunch-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Core twist routine (Pilates band): 2 sets</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-lunch-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stomach vacuums: 3 x 30 sec</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-lunch-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Cool down walk</div> </div> </div> </div>
+                <div class="workout-time evening-workout-container"> <div class="workout-time-title">Evening Workout</div> <div class="location-toggle"> <div id="saturday-toggle-gym" class="toggle-option active">📍 Gym</div> <div id="saturday-toggle-home" class="toggle-option">🏠 Home</div> </div> <div id="saturday-gym-exercises" class="exercise-block active"> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-evening-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Light glute maintenance circuit (bridges, kickbacks, clamshells)</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-evening-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Foam roll or Epsom salt bath</div> </div> </div> </div> <div id="saturday-home-exercises" class="exercise-block hidden"> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-evening-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Quick glute circuit: bridges 2x20, kickbacks 2x15, side-steps 2x15</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-evening-home-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Self-massage with foam roller or massage ball</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="saturday-evening-home-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Stretching sequence (10 min)</div> </div> </div> </div> </div>
+             </div> </div>
+             <div id="sunday-workout" class="workout-content"> <div class="workout-section"> <h2 class="routine-title">Sunday – Rest or Active Recovery</h2> <div class="workout-time"> <div class="workout-time-title">Active Option</div> <div class="workout-exercise"> <div class="step-header"> <div id="sunday-active-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Walk (flat or incline): 30–45 min</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="sunday-active-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Light core and stretching session</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="sunday-active-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Track measurements: waist, hips, thighs (monthly)</div> </div> </div> </div> <div class="workout-time"> <div class="workout-time-title">Complete Rest Option</div> <div class="workout-exercise"> <div class="step-header"> <div id="sunday-rest-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Take measurements (waist, hips, thighs)</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="sunday-rest-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Plan upcoming week's fitness goals</div> </div> </div> <div class="workout-exercise"> <div class="step-header"> <div id="sunday-rest-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div> <div class="step-title">Full rest day</div> </div> </div> </div> </div> </div>
+        </div>
+
+        <div id="fasting-section" class="section-content">
+            <h2 class="routine-title">⏳ Intermittent Fasting Tracker</h2>
+             <div class="fasting-controls">
+                <button id="protocol-16-8-btn" class="fasting-btn">16:8</button>
+                <button id="protocol-18-6-btn" class="fasting-btn">18:6</button>
+                <button id="protocol-20-4-btn" class="fasting-btn">20:4</button>
+                <button id="start-fast-btn" class="fasting-btn">Start Fast Now</button>
+                <button id="end-fast-btn" class="fasting-btn">End Fast Now</button>
+            </div>
+            <div id="fasting-status-display" class="fasting-status idle-window">
+                <div id="fasting-status-title" class="fasting-status-title">Status: Idle</div>
+                <div class="fasting-status-details">
+                    <p>Selected Protocol: <strong id="fasting-protocol-display">None</strong></p>
+                    <p>Start Time: <strong id="fasting-start-time-display">--:--</strong></p>
+                    <p>Target End Time: <strong id="fasting-end-time-display">--:--</strong></p>
+                    <p>Time Elapsed: <strong id="fasting-elapsed-time-display">00:00:00</strong></p>
+                    <p>Time Remaining: <strong id="fasting-remaining-time-display">00:00:00</strong></p>
+                </div>
+                <div class="fasting-progress-bar-container">
+                    <div id="fasting-progress-bar" class="fasting-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="history-toggle-section">
+             <input type="date" id="history-date-input">
+             <button id="load-history-btn" class="history-btn">Load History</button>
+             <button id="history-toggle-btn" class="history-btn">📊 Show History</button>
+        </div>
+        <div id="history-display-section" class="hidden">
+             <h3 id="history-display-title">Progress History</h3>
+             <div id="history-skincare-summary"></div>
+             <div id="history-workout-summary"></div>
+             <div id="history-fasting-summary"></div>
+             <p id="history-no-data" class="hidden" style="text-align: center; color: #6b7280; font-style: italic;">No data found for selected date.</p>
+        </div>
+
+        <div class="notice">
+            Progress automatically saves and resets at midnight (Daily Tasks Only)
+        </div>
+
+    </div>
+    <script>
+        // --- Global Error Handler ---
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error("Uncaught Error:", message, "\nSource:", source, "\nLine:", lineno, "Col:", colno, "\nError Obj:", error);
+            return true; // Suppress default browser error handling
+        };
+
+        // --- Constants ---
+        const today = new Date();
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+        const treatmentSchedule = { 0: 'slugging', 1: 'retinoid', 2: 'exfoliant', 3: 'retinoid', 4: 'exfoliant', 5: 'retinoid', 6: 'slugging' };
+        const todaysRecommendedTreatment = treatmentSchedule[dayOfWeek]; // Get today's treatment once
+        const fastProtocols = { '16:8': { fast: 16, eat: 8 }, '18:6': { fast: 18, eat: 6 }, '20:4': { fast: 20, eat: 4 } };
+
+        // --- Global State Variables (Live State for Today) ---
+        let currentSection = 'skincare';
+        let currentRoutine = 'morning';
+        let currentTreatment = todaysRecommendedTreatment; // Default to today's
+        let currentWorkoutDay = dayNames[dayOfWeek].toLowerCase(); // Default to today
+        let completedSteps = {}; // Holds { stepId: true } for today's checked items
+        let workoutLocations = { monday: 'gym', tuesday: 'gym', wednesday: 'gym', thursday: 'gym', friday: 'gym', saturday: 'gym', sunday: 'active' };
+        let fastingState = 'idle'; let fastStartTime = null; let fastEndTime = null; let eatingEndTime = null; let selectedProtocol = '16:8'; let fastTimerInterval = null;
+        let lastSavedDate = null; // Tracks the date associated with the currently loaded live state
+
+        // --- Storage Keys ---
+        const STORAGE_KEYS = {
+            CURRENT_STATE: 'tracker-current-state', // Stores the live state object for today
+            DAILY_SUMMARY_PREFIX: 'tracker-daily-summary-', // Prefix for daily summaries (YYYY-MM-DD)
+            FASTING_LOG: 'tracker-fasting-log', // Array of all fasting events
+            LAST_SUMMARY_DATE: 'tracker-last-summary-date' // YYYY-MM-DD of last saved summary
+        };
+
+        // --- Date Formatting ---
+        function getLocalDateString(date = new Date()) { /* ... as before ... */
+            try { const year = date.getFullYear(); const month = String(date.getMonth() + 1).padStart(2, '0'); const day = String(date.getDate()).padStart(2, '0'); return `${year}-${month}-${day}`; }
+            catch (error) { console.error("Error formatting date:", error); return date.toISOString().split('T')[0]; }
+        }
+
+        // --- LocalStorage Helper Functions ---
+        function saveToStorage(key, data) { /* ... as before ... */ try { localStorage.setItem(key, JSON.stringify(data)); return true; } catch (e) { console.warn(`LocalStorage save error (${key}):`, e); return false; } }
+        function loadFromStorage(key) { /* ... as before ... */ try { const data = localStorage.getItem(key); return data ? JSON.parse(data) : null; } catch (e) { console.warn(`LocalStorage load error (${key}):`, e); return null; } }
+        function clearSavedData() { /* ... as before ... */
+            try {
+                console.log("Attempting to clear all tracker data...");
+                const keysToClear = Object.keys(localStorage).filter(key => key.startsWith('tracker-'));
+                if (keysToClear.length === 0) { console.log("No tracker data found."); alert("No tracker data found in storage."); return; }
+                 if (confirm(`This will delete ALL tracker data, including history (${keysToClear.length} items). Are you sure?`)) {
+                    keysToClear.forEach(key => { localStorage.removeItem(key); console.log(`Removed: ${key}`); });
+                    completedSteps = {}; workoutLocations = { monday: 'gym', tuesday: 'gym', wednesday: 'gym', thursday: 'gym', friday: 'gym', saturday: 'gym', sunday: 'active' };
+                    fastingState = 'idle'; fastStartTime = null; fastEndTime = null; eatingEndTime = null; selectedProtocol = '16:8';
+                    if (fastTimerInterval) clearInterval(fastTimerInterval); fastTimerInterval = null;
+                    console.log("Cleared all saved data."); alert("All tracker data cleared."); location.reload();
+                } else { console.log("Clear data cancelled."); }
+            } catch (e) { console.error("Error clearing data:", e); alert("Error clearing data."); }
+        }
+
+        // --- Current State Management ---
+        function saveCurrentState() { /* ... as before ... */
+            try {
+                const stateToSave = {
+                    lastSavedDate: getLocalDateString(), completedSteps: completedSteps, currentSection: currentSection,
+                    currentRoutine: currentRoutine, currentTreatment: currentTreatment, currentWorkoutDay: currentWorkoutDay,
+                    workoutLocations: workoutLocations, fastingState: fastingState, fastStartTime: fastStartTime,
+                    fastEndTime: fastEndTime, eatingEndTime: eatingEndTime, selectedProtocol: selectedProtocol
+                };
+                saveToStorage(STORAGE_KEYS.CURRENT_STATE, stateToSave);
+            } catch (error) { console.error("Error in saveCurrentState:", error); }
+        }
+
+        function loadCurrentState() { /* ... logic improved in previous step ... */
+             try {
+                const loadedState = loadFromStorage(STORAGE_KEYS.CURRENT_STATE);
+                const todayStr = getLocalDateString();
+                const defaultLocations = { monday: 'gym', tuesday: 'gym', wednesday: 'gym', thursday: 'gym', friday: 'gym', saturday: 'gym', sunday: 'active' };
+
+                if (loadedState && typeof loadedState === 'object' && loadedState.lastSavedDate === todayStr) {
+                    console.log("Loading current state for today:", loadedState);
+                    completedSteps = (loadedState.completedSteps && typeof loadedState.completedSteps === 'object') ? loadedState.completedSteps : {};
+                    currentSection = loadedState.currentSection || 'skincare';
+                    currentRoutine = loadedState.currentRoutine || 'morning';
+                    currentTreatment = loadedState.currentTreatment || todaysRecommendedTreatment;
+                    currentWorkoutDay = loadedState.currentWorkoutDay || dayNames[dayOfWeek].toLowerCase();
+                    workoutLocations = (loadedState.workoutLocations && typeof loadedState.workoutLocations === 'object') ? { ...defaultLocations, ...loadedState.workoutLocations } : defaultLocations;
+                    fastingState = loadedState.fastingState || 'idle';
+                    fastStartTime = loadedState.fastStartTime || null;
+                    fastEndTime = loadedState.fastEndTime || null;
+                    eatingEndTime = loadedState.eatingEndTime || null;
+                    selectedProtocol = loadedState.selectedProtocol || '16:8';
+                    lastSavedDate = loadedState.lastSavedDate;
+
+                    // Restore checkbox visuals
+                    Object.keys(completedSteps).forEach(stepId => {
+                        const checkbox = document.getElementById(stepId);
+                        if (checkbox) {
+                            const shouldBeChecked = completedSteps[stepId];
+                            checkbox.classList.toggle('checked', !!shouldBeChecked); // Use boolean coercion
+                            checkbox.innerHTML = shouldBeChecked ? '✓' : '';
+                        }
+                    });
+
+                } else {
+                    console.log("No valid current state found for today or state is old, using defaults.");
+                    completedSteps = {}; currentSection = 'skincare'; currentRoutine = 'morning'; currentTreatment = todaysRecommendedTreatment;
+                    currentWorkoutDay = dayNames[dayOfWeek].toLowerCase(); workoutLocations = defaultLocations;
+                    fastingState = 'idle'; fastStartTime = null; fastEndTime = null; eatingEndTime = null; selectedProtocol = '16:8';
+                    lastSavedDate = todayStr;
+                    saveCurrentState(); // Save the fresh default state for today
+                }
+             } catch (error) {
+                  console.error("Error loading current state:", error);
+                  completedSteps = {}; currentSection = 'skincare'; currentRoutine = 'morning'; currentTreatment = todaysRecommendedTreatment;
+                  currentWorkoutDay = dayNames[dayOfWeek].toLowerCase(); workoutLocations = { monday: 'gym', tuesday: 'gym', wednesday: 'gym', thursday: 'gym', friday: 'gym', saturday: 'gym', sunday: 'active' };
+                  fastingState = 'idle'; fastStartTime = null; fastEndTime = null; eatingEndTime = null; selectedProtocol = '16:8'; lastSavedDate = getLocalDateString();
+                  saveCurrentState(); // Try to save defaults
+             }
+        }
+
+        // --- Daily Summary & History ---
+        function calculateSummaryPercentages(steps, routine, treatment, workoutDay, locations) { /* ... logic improved in previous step ... */
+            try {
+                let morningPercent = 0; let eveningPercent = 0; let workoutPercent = 0;
+                const safeSteps = steps && typeof steps === 'object' ? steps : {};
+                const morningStepsIds = ['morning-cleanse', 'morning-vitaminc', 'morning-moisturize', 'morning-sunscreen'];
+                const morningCompleted = morningStepsIds.filter(id => safeSteps[id]).length;
+                morningPercent = morningStepsIds.length > 0 ? Math.round((morningCompleted / morningStepsIds.length) * 100) : 0;
+                let eveningStepsIds = ['evening-cleanse', 'evening-hydration', 'evening-moisturize'];
+                const eveningTreatment = treatment || todaysRecommendedTreatment;
+                if (eveningTreatment === 'retinoid') eveningStepsIds.push('evening-treatment');
+                else if (eveningTreatment === 'exfoliant') eveningStepsIds.push('evening-treatment-exfoliant');
+                else if (eveningTreatment === 'slugging') { eveningStepsIds.push('evening-treatment-slugging', 'evening-slug'); }
+                const eveningCompleted = eveningStepsIds.filter(id => safeSteps[id]).length;
+                eveningPercent = eveningStepsIds.length > 0 ? Math.round((eveningCompleted / eveningStepsIds.length) * 100) : 0;
+                const safeLocations = locations && typeof locations === 'object' ? locations : {};
+                const safeWorkoutDay = workoutDay || dayNames[0].toLowerCase();
+                const workoutContainer = document.getElementById(`${safeWorkoutDay}-workout`);
+                let workoutStepsIds = [];
+                if (workoutContainer) {
+                    const lunchSteps = Array.from(workoutContainer.querySelectorAll('.workout-time:not(.evening-workout-container) .step-checkbox')).map(el => el.id).filter(id => id);
+                    workoutStepsIds.push(...lunchSteps);
+                    const eveningContainer = workoutContainer.querySelector('.evening-workout-container');
+                    if (eveningContainer) {
+                        const selectedLocation = safeLocations[safeWorkoutDay] || (safeWorkoutDay === 'sunday' ? 'active' : 'gym');
+                        if (selectedLocation !== 'active' && selectedLocation !== 'rest') {
+                            const locationBlockId = `${safeWorkoutDay}-${selectedLocation}-exercises`;
+                            const activeEveningBlock = eveningContainer.querySelector(`#${locationBlockId}`);
+                            if (activeEveningBlock) { const eveningSteps = Array.from(activeEveningBlock.querySelectorAll('.step-checkbox')).map(el => el.id).filter(id => id); workoutStepsIds.push(...eveningSteps); }
+                        }
+                    }
+                    if (safeWorkoutDay === 'sunday') { workoutStepsIds = Array.from(workoutContainer.querySelectorAll('.step-checkbox')).map(el => el.id).filter(id => id); }
+                }
+                const workoutCompleted = workoutStepsIds.filter(id => safeSteps[id]).length;
+                workoutPercent = workoutStepsIds.length > 0 ? Math.round((workoutCompleted / workoutStepsIds.length) * 100) : 0;
+                return { skincare: { morningPercent, eveningPercent, treatment: eveningTreatment }, workout: { day: safeWorkoutDay, location: safeLocations[safeWorkoutDay] ?? 'N/A', percent: workoutPercent } };
+            } catch (error) { console.error("Error calculating summary percentages:", error); return { skincare: { morningPercent: 0, eveningPercent: 0, treatment: 'Error' }, workout: { day: 'Error', location: 'Error', percent: 0 } }; }
+        }
+        function saveDailySummary(dateStrToSave, summaryState) { /* ... logic improved in previous step ... */
+             try {
+                const summaryKey = `${STORAGE_KEYS.DAILY_SUMMARY_PREFIX}${dateStrToSave}`;
+                const lastSummaryDate = loadFromStorage(STORAGE_KEYS.LAST_SUMMARY_DATE);
+                if (lastSummaryDate === dateStrToSave) { return; }
+                if (!summaryState || typeof summaryState !== 'object') { console.warn(`Invalid state for saving summary for ${dateStrToSave}`); return; }
+                console.log(`Calculating and saving summary for date: ${dateStrToSave}`);
+                const percentages = calculateSummaryPercentages( summaryState.completedSteps, summaryState.currentRoutine, summaryState.currentTreatment, summaryState.currentWorkoutDay, summaryState.workoutLocations );
+                console.log("Calculated Summary:", percentages);
+                saveToStorage(summaryKey, percentages);
+                saveToStorage(STORAGE_KEYS.LAST_SUMMARY_DATE, dateStrToSave);
+             } catch (error) { console.error(`Error saving daily summary for ${dateStrToSave}:`, error); }
+        }
+        function checkForSummarySave() { /* ... logic improved in previous step ... */
+             try {
+                const todayStr = getLocalDateString();
+                const currentState = loadFromStorage(STORAGE_KEYS.CURRENT_STATE);
+                if (currentState?.lastSavedDate && currentState.lastSavedDate !== todayStr) {
+                    const dateToSummarize = currentState.lastSavedDate;
+                    const summaryKey = `${STORAGE_KEYS.DAILY_SUMMARY_PREFIX}${dateToSummarize}`;
+                    const existingSummary = loadFromStorage(summaryKey);
+                    if (!existingSummary) { console.log(`Need to save summary for previous day: ${dateToSummarize}`); saveDailySummary(dateToSummarize, currentState); }
+                } else if (!currentState) { console.log("No current state found, cannot save summary."); }
+             } catch (error) { console.error("Error checking for summary save:", error); }
+        }
+        function displayHistory() { /* ... logic improved in previous step ... */
+             try {
+                const dateInput = document.getElementById('history-date-input');
+                const selectedDateStr = dateInput.value;
+                if (!selectedDateStr) { alert("Please select a date."); return; }
+                console.log(`Loading history for date: ${selectedDateStr}`);
+                const historyDisplaySection = document.getElementById('history-display-section');
+                const historyTitle = document.getElementById('history-display-title');
+                const noDataMsg = document.getElementById('history-no-data');
+                const skincareDiv = document.getElementById('history-skincare-summary');
+                const workoutDiv = document.getElementById('history-workout-summary');
+                const fastingDiv = document.getElementById('history-fasting-summary');
+                skincareDiv.innerHTML = ''; workoutDiv.innerHTML = ''; fastingDiv.innerHTML = '';
+                noDataMsg.classList.add('hidden'); historyTitle.textContent = `Progress History for ${selectedDateStr}`;
+                let dataFound = false;
+                const summaryKey = `${STORAGE_KEYS.DAILY_SUMMARY_PREFIX}${selectedDateStr}`;
+                const dailySummary = loadFromStorage(summaryKey);
+                if (dailySummary) {
+                    dataFound = true;
+                    const workoutDayName = dailySummary.workout?.day ? (dayNames.find(d => d.toLowerCase() === dailySummary.workout.day) || dailySummary.workout.day) : 'N/A';
+                    skincareDiv.innerHTML = `<div class="history-summary-section"><div class="history-summary-title">💧 Skincare</div><div class="history-summary-details">Morning: ${dailySummary.skincare?.morningPercent ?? 'N/A'}%<br>Evening: ${dailySummary.skincare?.eveningPercent ?? 'N/A'}% (Treatment: ${dailySummary.skincare?.treatment ?? 'N/A'})</div></div>`;
+                    workoutDiv.innerHTML = `<div class="history-summary-section"><div class="history-summary-title">💪 Workout (${workoutDayName})</div><div class="history-summary-details">Location: ${dailySummary.workout?.location ?? 'N/A'}<br>Completion: ${dailySummary.workout?.percent ?? 'N/A'}%</div></div>`;
+                }
+                const fastingLog = loadFromStorage(STORAGE_KEYS.FASTING_LOG) || [];
+                const selectedDateStart = new Date(selectedDateStr + 'T00:00:00').getTime();
+                const selectedDateEnd = selectedDateStart + 24 * 60 * 60 * 1000;
+                const relevantFastingEvents = fastingLog.filter(event => event?.time >= selectedDateStart && event?.time < selectedDateEnd);
+                if (relevantFastingEvents.length > 0) {
+                    dataFound = true;
+                    let fastingHtml = `<div class="history-summary-section"><div class="history-summary-title">⏳ Fasting Events</div><div class="history-summary-details">`;
+                    relevantFastingEvents.forEach(event => {
+                        const eventTime = new Date(event.time).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+                        if (event.type === 'start') { fastingHtml += `<div class="history-fasting-event">Fast Started: ${eventTime}</div>`; }
+                        else if (event.type === 'end') { const durationStr = event.durationMs ? formatTime(event.durationMs) : 'N/A'; fastingHtml += `<div class="history-fasting-event">Fast Ended: ${eventTime} (Duration: ${durationStr})</div>`; }
+                    });
+                    fastingHtml += `</div></div>`;
+                    fastingDiv.innerHTML = fastingHtml;
+                }
+                if (!dataFound) { noDataMsg.classList.remove('hidden'); }
+                historyDisplaySection.classList.remove('hidden');
+                document.getElementById('history-toggle-btn').textContent = '🔼 Hide History';
+             } catch (error) { console.error("Error displaying history:", error); alert("An error occurred displaying history."); }
+        }
+
+        // --- Initial Header Setup ---
+        function setupHeader() { /* ... as before ... */
+            try {
+                 document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+                 document.getElementById('today-recommendation').innerHTML = `Today: <b>${dayNames[dayOfWeek]}</b> — Skincare: <b>${todaysRecommendedTreatment.charAt(0).toUpperCase() + todaysRecommendedTreatment.slice(1)}</b>`;
+                 const scheduleItemId = `${todaysRecommendedTreatment}-schedule`; const scheduleEl = document.getElementById(scheduleItemId); if (scheduleEl) scheduleEl.classList.add('highlighted');
+            } catch (error) { console.error("Error setting up header:", error); }
+        }
+
+        // --- UI Switching Functions ---
+        function switchMainTab(section) {
+             console.log(`switchMainTab called with: ${section}`); // Debug log
+             try {
+                document.querySelectorAll('.main-tab').forEach(tab => tab.classList.remove('active')); document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+                const activeTab = document.getElementById(`${section}-main-tab`); const activeSection = document.getElementById(`${section}-section`);
+                if (activeTab) activeTab.classList.add('active'); if (activeSection) activeSection.classList.add('active');
+                currentSection = section;
+                const mainProgressSection = document.getElementById('main-progress-section'); if (mainProgressSection) mainProgressSection.style.display = (section === 'fasting') ? 'none' : '';
+                if (section === 'skincare') { switchRoutine(currentRoutine); } else if (section === 'workout') { const dayIndex = dayNames.findIndex(day => day.toLowerCase() === currentWorkoutDay); setActiveWorkoutDay(dayIndex !== -1 ? dayIndex : dayOfWeek); } else if (section === 'fasting') { updateFastingUI(); }
+                if (section !== 'fasting') { updateProgress(); }
+                saveCurrentState();
+             } catch (error) { console.error("Error in switchMainTab:", error); }
+        }
+        function switchRoutine(routine) {
+             console.log(`switchRoutine called with: ${routine}`); // Debug log
+             try {
+                document.getElementById('morning-tab').className = `tab ${routine === 'morning' ? 'active-morning' : 'inactive'}`; document.getElementById('evening-tab').className = `tab ${routine === 'evening' ? 'active-evening' : 'inactive'}`;
+                document.getElementById('morning-routine').classList.toggle('hidden', routine !== 'morning'); document.getElementById('evening-routine').classList.toggle('hidden', routine !== 'evening');
+                currentRoutine = routine;
+                if (routine === 'evening') { selectTreatment(todaysRecommendedTreatment); console.log(`Switched to evening routine, setting treatment to today's: ${todaysRecommendedTreatment}`); }
+                updateProgress(); saveCurrentState();
+             } catch (error) { console.error("Error in switchRoutine:", error); }
+        }
+        function setActiveWorkoutDay(dayIndex) {
+             console.log(`setActiveWorkoutDay called with: ${dayIndex}`); // Debug log
+             try {
+                const validDayIndex = (dayIndex >= 0 && dayIndex <= 6) ? dayIndex : dayOfWeek; const newDayName = dayNames[validDayIndex].toLowerCase();
+                document.querySelectorAll('.workout-tab').forEach(tab => tab.classList.remove('active')); document.querySelectorAll('.workout-content').forEach(content => content.classList.remove('active'));
+                const tabElement = document.getElementById(`${newDayName}-tab`); const contentElement = document.getElementById(`${newDayName}-workout`);
+                if (tabElement) tabElement.classList.add('active');
+                if (contentElement) {
+                    contentElement.classList.add('active'); currentWorkoutDay = newDayName; console.log(`Set active workout day to: ${currentWorkoutDay}`);
+                    const currentLocation = workoutLocations[currentWorkoutDay] || (currentWorkoutDay === 'sunday' ? 'active' : 'gym'); updateLocationToggleUI(currentWorkoutDay, currentLocation);
+                } else {
+                    console.warn(`Workout content for ${newDayName} not found. Defaulting to Monday.`); document.getElementById('monday-tab')?.classList.add('active'); document.getElementById('monday-workout')?.classList.add('active');
+                    currentWorkoutDay = 'monday'; updateLocationToggleUI('monday', workoutLocations.monday || 'gym');
+                }
+                updateProgress(); saveCurrentState();
+             } catch (error) { console.error("Error in setActiveWorkoutDay:", error); }
+        }
+        function selectTreatment(treatment) {
+             console.log(`selectTreatment called with: ${treatment}`); // Debug log
+             try {
+                currentTreatment = treatment; document.querySelectorAll('.treatment-btn').forEach(btn => btn.classList.toggle('active', btn.id === `${treatment}-btn`));
+                document.getElementById('retinoid-step').classList.toggle('hidden', treatment !== 'retinoid'); document.getElementById('exfoliant-step').classList.toggle('hidden', treatment !== 'exfoliant');
+                document.getElementById('slugging-step').classList.toggle('hidden', treatment !== 'slugging'); document.getElementById('evening-slug').classList.toggle('hidden', treatment !== 'slugging');
+                updateProgress(); saveCurrentState();
+             } catch (error) { console.error("Error in selectTreatment:", error); }
+        }
+        function switchWorkoutLocation(dayName, location) {
+             console.log(`switchWorkoutLocation called with: ${dayName}, ${location}`); // Debug log
+             try {
+                if (!workoutLocations.hasOwnProperty(dayName)) { console.warn(`Invalid day name "${dayName}" for location switch.`); return; }
+                workoutLocations[dayName] = location;
+                updateLocationToggleUI(dayName, location); updateProgress(); saveCurrentState();
+             } catch (error) { console.error("Error in switchWorkoutLocation:", error); }
+        }
+        function updateLocationToggleUI(dayName, location) { /* ... as before ... */
+             try {
+                const gymToggle = document.getElementById(`${dayName}-toggle-gym`); const homeToggle = document.getElementById(`${dayName}-toggle-home`);
+                if (gymToggle) gymToggle.classList.toggle('active', location === 'gym'); if (homeToggle) homeToggle.classList.toggle('active', location === 'home');
+                const gymExercises = document.getElementById(`${dayName}-gym-exercises`); const homeExercises = document.getElementById(`${dayName}-home-exercises`);
+                if (gymExercises) gymExercises.classList.toggle('hidden', location !== 'gym'); if (gymExercises) gymExercises.classList.toggle('active', location === 'gym');
+                if (homeExercises) homeExercises.classList.toggle('hidden', location !== 'home'); if (homeExercises) homeExercises.classList.toggle('active', location === 'home');
+             } catch (error) { console.error("Error updating location toggle UI:", error); }
+        }
+
+        // --- Progress and State Management ---
+        function toggleCheckbox(element) { /* ... logic as before ... */
+            try {
+                if (!element || !element.id) { console.error("Invalid element in toggleCheckbox"); return; }
+                const stepId = element.id; const isChecked = element.classList.toggle('checked'); element.innerHTML = isChecked ? '✓' : '';
+                if (isChecked) { completedSteps[stepId] = true; } else { delete completedSteps[stepId]; }
+                if (currentSection !== 'fasting') { updateProgress(); }
+                saveCurrentState(); // Save the updated steps to current state
+            } catch (error) { console.error("Error toggling checkbox:", error); }
+        }
+        function updateProgress() { /* ... logic improved in previous step ... */
+             if (currentSection === 'fasting') return;
+             try {
+                let totalSteps = 0; let completedCount = 0; let relevantStepIds = [];
+                if (currentSection === 'skincare') {
+                    if (currentRoutine === 'morning') { relevantStepIds = ['morning-cleanse', 'morning-vitaminc', 'morning-moisturize', 'morning-sunscreen']; }
+                    else { relevantStepIds = ['evening-cleanse', 'evening-hydration', 'evening-moisturize'];
+                        if (currentTreatment === 'retinoid') relevantStepIds.push('evening-treatment');
+                        else if (currentTreatment === 'exfoliant') relevantStepIds.push('evening-treatment-exfoliant');
+                        else if (currentTreatment === 'slugging') { relevantStepIds.push('evening-treatment-slugging', 'evening-slug'); }
+                    }
+                } else { // Workout section
+                    const workoutContainer = document.getElementById(`${currentWorkoutDay}-workout`);
+                    if (workoutContainer) {
+                        const lunchSteps = Array.from(workoutContainer.querySelectorAll('.workout-time:not(.evening-workout-container) .step-checkbox')).map(el => el.id).filter(id => id);
+                        relevantStepIds.push(...lunchSteps);
+                        const eveningContainer = workoutContainer.querySelector('.evening-workout-container');
+                        if (eveningContainer) {
+                            const selectedLocation = workoutLocations[currentWorkoutDay] || (currentWorkoutDay === 'sunday' ? 'active' : 'gym');
+                            if (selectedLocation !== 'active' && selectedLocation !== 'rest') {
+                                const locationBlockId = `${currentWorkoutDay}-${selectedLocation}-exercises`;
+                                const activeEveningBlock = eveningContainer.querySelector(`#${locationBlockId}`);
+                                if (activeEveningBlock) { const eveningSteps = Array.from(activeEveningBlock.querySelectorAll('.step-checkbox')).map(el => el.id).filter(id => id); relevantStepIds.push(...eveningSteps); }
+                            }
+                        }
+                        if (currentWorkoutDay === 'sunday') { relevantStepIds = Array.from(workoutContainer.querySelectorAll('.step-checkbox')).map(el => el.id).filter(id => id); }
+                    }
+                }
+                totalSteps = relevantStepIds.length; completedCount = relevantStepIds.filter(stepId => completedSteps[stepId]).length;
+                const progressPercentage = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
+                const progressBar = document.getElementById('progress-bar');
+                const progressText = document.getElementById('progress-percentage');
+                if(progressText) progressText.textContent = `${progressPercentage}%`;
+                if(progressBar) progressBar.style.width = `${progressPercentage}%`;
+             } catch (error) { console.error("Error updating progress:", error); }
+        }
+
+        // --- Fasting Functions ---
+        function selectFastProtocol(protocol) { /* ... logic improved in previous step ... */
+             try {
+                if (!fastProtocols[protocol]) return; selectedProtocol = protocol;
+                document.querySelectorAll('.fasting-controls .fasting-btn[id^="protocol-"]').forEach(btn => btn.classList.toggle('active', btn.id === `protocol-${protocol}-btn`));
+                document.getElementById('fasting-protocol-display').textContent = protocol; console.log(`Selected fast protocol: ${protocol}`);
+                saveCurrentState(); // Save change
+             } catch (error) { console.error("Error selecting fast protocol:", error); }
+        }
+        function calculateFastTimes() { /* ... logic improved in previous step ... */
+             try {
+                if (!fastStartTime || !selectedProtocol || !fastProtocols[selectedProtocol]) { fastEndTime = null; eatingEndTime = null; return; }
+                const protocol = fastProtocols[selectedProtocol]; const fastDurationMs = protocol.fast * 3600000; const eatDurationMs = protocol.eat * 3600000;
+                fastEndTime = fastStartTime + fastDurationMs; eatingEndTime = fastEndTime + eatDurationMs;
+             } catch (error) { console.error("Error calculating fast times:", error); }
+        }
+        function startFast() { /* ... logic improved in previous step ... */
+             try {
+                if (fastingState !== 'idle') { console.log("Cannot start fast, already active."); return; }
+                fastingState = 'fasting'; fastStartTime = Date.now(); calculateFastTimes();
+                console.log(`Fast started: ${new Date(fastStartTime).toLocaleTimeString()}, Protocol: ${selectedProtocol}, Ends: ${fastEndTime ? new Date(fastEndTime).toLocaleTimeString() : 'N/A'}`);
+                const log = loadFromStorage(STORAGE_KEYS.FASTING_LOG) || []; log.push({ type: 'start', time: fastStartTime }); saveToStorage(STORAGE_KEYS.FASTING_LOG, log);
+                updateFastingUI(); startTimer(); saveCurrentState();
+             } catch (error) { console.error("Error starting fast:", error); }
+        }
+        function endFast() { /* ... logic improved in previous step ... */
+             try {
+                if (fastingState === 'idle') { console.log("No active fast to end."); return; }
+                const endTime = Date.now(); const durationMs = fastStartTime ? (endTime - fastStartTime) : null;
+                fastingState = 'idle'; stopTimer(); console.log("Fast ended manually.");
+                const log = loadFromStorage(STORAGE_KEYS.FASTING_LOG) || []; log.push({ type: 'end', time: endTime, durationMs: durationMs }); saveToStorage(STORAGE_KEYS.FASTING_LOG, log);
+                updateFastingUI(); saveCurrentState();
+             } catch (error) { console.error("Error ending fast:", error); }
+        }
+        function formatTime(ms) { /* ... logic as before ... */
+            if (ms === null || ms === undefined || ms < 0) return '00:00:00';
+            const totalSeconds = Math.max(0, Math.floor(ms / 1000)); const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0'); const seconds = String(totalSeconds % 60).padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+        function formatDateTime(timestamp) { /* ... logic as before ... */
+             if (!timestamp) return '--:--'; return new Date(timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+        }
+        function updateFastingTimer() { /* ... logic improved in previous step ... */
+             try {
+                const now = Date.now(); let elapsedMs = 0; let remainingMs = 0; let totalDurationMs = 0; let progressPercent = 0; let stateChanged = false;
+                if (fastingState === 'fasting' && fastEndTime && now >= fastEndTime) { console.log("Fast ended, switching to eating window."); fastingState = 'eating'; stateChanged = true; }
+                else if (fastingState === 'eating' && eatingEndTime && now >= eatingEndTime) { console.log("Eating window ended, switching to idle."); fastingState = 'idle'; stopTimer(); stateChanged = true; }
+                if (fastingState === 'fasting' && fastStartTime && fastEndTime) { elapsedMs = now - fastStartTime; remainingMs = fastEndTime - now; totalDurationMs = fastEndTime - fastStartTime; progressPercent = totalDurationMs > 0 ? Math.min(100, (elapsedMs / totalDurationMs) * 100) : 0; }
+                else if (fastingState === 'eating' && fastEndTime && eatingEndTime) { elapsedMs = now - fastEndTime; remainingMs = eatingEndTime - now; totalDurationMs = eatingEndTime - fastEndTime; progressPercent = totalDurationMs > 0 ? Math.min(100, (elapsedMs / totalDurationMs) * 100) : 0; }
+                if (fastingState !== 'idle') { document.getElementById('fasting-elapsed-time-display').textContent = formatTime(elapsedMs); document.getElementById('fasting-remaining-time-display').textContent = formatTime(remainingMs); document.getElementById('fasting-progress-bar').style.width = `${progressPercent}%`; }
+                else { document.getElementById('fasting-elapsed-time-display').textContent = '00:00:00'; document.getElementById('fasting-remaining-time-display').textContent = '00:00:00'; document.getElementById('fasting-progress-bar').style.width = `0%`; }
+                updateFastingUIStatus();
+                if (stateChanged) { saveCurrentState(); if(fastingState === 'idle') updateFastingUI(); }
+             } catch (error) { console.error("Error updating fasting timer:", error); stopTimer(); }
+        }
+        function updateFastingUIStatus() { /* ... logic improved in previous step ... */
+             try {
+                const statusDisplay = document.getElementById('fasting-status-display'); const statusTitle = document.getElementById('fasting-status-title');
+                const protocolDisplay = document.getElementById('fasting-protocol-display'); const startTimeDisplay = document.getElementById('fasting-start-time-display'); const endTimeDisplay = document.getElementById('fasting-end-time-display');
+                protocolDisplay.textContent = selectedProtocol || 'None'; startTimeDisplay.textContent = formatDateTime(fastStartTime);
+                statusDisplay.classList.remove('idle-window', 'fasting-window', 'eating-window');
+                if (fastingState === 'fasting') { statusTitle.textContent = 'Status: Fasting'; endTimeDisplay.textContent = formatDateTime(fastEndTime); statusDisplay.classList.add('fasting-window'); }
+                else if (fastingState === 'eating') { statusTitle.textContent = 'Status: Eating Window'; endTimeDisplay.textContent = formatDateTime(eatingEndTime); statusDisplay.classList.add('eating-window'); }
+                else { statusTitle.textContent = 'Status: Idle'; endTimeDisplay.textContent = '--:--'; statusDisplay.classList.add('idle-window'); }
+             } catch (error) { console.error("Error updating fasting UI status:", error); }
+        }
+        function updateFastingUI() { /* ... logic improved in previous step ... */
+             try {
+                const startBtn = document.getElementById('start-fast-btn'); const endBtn = document.getElementById('end-fast-btn');
+                startBtn.disabled = fastingState !== 'idle'; endBtn.disabled = fastingState === 'idle';
+                document.querySelectorAll('.fasting-controls .fasting-btn[id^="protocol-"]').forEach(btn => btn.classList.toggle('active', btn.id === `protocol-${selectedProtocol}-btn`));
+                updateFastingUIStatus();
+                if (fastingState === 'idle') { document.getElementById('fasting-elapsed-time-display').textContent = '00:00:00'; document.getElementById('fasting-remaining-time-display').textContent = '00:00:00'; document.getElementById('fasting-progress-bar').style.width = '0%'; }
+                else { updateFastingTimer(); }
+             } catch (error) { console.error("Error updating fasting UI:", error); }
+        }
+        function startTimer() { /* ... as before ... */ stopTimer(); updateFastingTimer(); fastTimerInterval = setInterval(updateFastingTimer, 1000); console.log("Fasting timer started."); }
+        function stopTimer() { /* ... as before ... */ if (fastTimerInterval) { clearInterval(fastTimerInterval); fastTimerInterval = null; console.log("Fasting timer stopped."); } }
+
+        // --- History Toggle Function ---
+        function toggleHistory() { /* ... as before ... */
+            try {
+                const historySection = document.getElementById('history-display-section');
+                const historyBtn = document.getElementById('history-toggle-btn');
+                const isHidden = historySection.classList.toggle('hidden');
+                historyBtn.textContent = isHidden ? '📊 Show History' : '🔼 Hide History';
+                console.log(`History section ${isHidden ? 'hidden' : 'shown'}`);
+                if (!isHidden) { const dateInput = document.getElementById('history-date-input'); if (!dateInput.value) { dateInput.value = getLocalDateString(); } }
+            } catch (error) { console.error("Error toggling history:", error); }
+        }
+
+        // --- State Loading & Initialization ---
+        function loadStateAndSetupUI() { /* ... logic improved in previous step ... */
+            try {
+                console.log("--- Initializing App ---");
+                checkForSummarySave(); // Save summary for previous day if needed *before* loading today's state
+                loadCurrentState(); // Load today's state or defaults
+                setupHeader(); // Set header date/recommendation
+                switchMainTab(currentSection); // Apply loaded section/routine/day/treatment/location UI
+                updateFastingUI(); // Apply loaded fasting UI
+                if (fastingState === 'fasting' || fastingState === 'eating') { startTimer(); } // Restart timer if needed
+                updateProgress(); // Update main progress bar
+                console.log("--- Initialization Complete ---");
+            } catch (error) {
+                 console.error("Critical error during initialization:", error);
+                 alert("An error occurred during initialization. Please try clearing data or contact support if the issue persists.");
+            }
+        }
+
+        // --- NEW: Attach Event Listeners ---
+        function attachEventListeners() {
+            console.log("Attaching event listeners...");
+            try {
+                // Main Tabs
+                document.getElementById('skincare-main-tab')?.addEventListener('click', () => switchMainTab('skincare'));
+                document.getElementById('workout-main-tab')?.addEventListener('click', () => switchMainTab('workout'));
+                document.getElementById('fasting-main-tab')?.addEventListener('click', () => switchMainTab('fasting'));
+                console.log("Listeners attached for main tabs.");
+
+                // Skincare Tabs
+                document.getElementById('morning-tab')?.addEventListener('click', () => switchRoutine('morning'));
+                document.getElementById('evening-tab')?.addEventListener('click', () => switchRoutine('evening'));
+                document.getElementById('retinoid-btn')?.addEventListener('click', () => selectTreatment('retinoid'));
+                document.getElementById('exfoliant-btn')?.addEventListener('click', () => selectTreatment('exfoliant'));
+                document.getElementById('slugging-btn')?.addEventListener('click', () => selectTreatment('slugging'));
+                console.log("Listeners attached for skincare.");
+
+                // Workout Day Tabs
+                document.getElementById('monday-tab')?.addEventListener('click', () => setActiveWorkoutDay(1));
+                document.getElementById('tuesday-tab')?.addEventListener('click', () => setActiveWorkoutDay(2));
+                document.getElementById('wednesday-tab')?.addEventListener('click', () => setActiveWorkoutDay(3));
+                document.getElementById('thursday-tab')?.addEventListener('click', () => setActiveWorkoutDay(4));
+                document.getElementById('friday-tab')?.addEventListener('click', () => setActiveWorkoutDay(5));
+                document.getElementById('saturday-tab')?.addEventListener('click', () => setActiveWorkoutDay(6));
+                document.getElementById('sunday-tab')?.addEventListener('click', () => setActiveWorkoutDay(0));
+                 console.log("Listeners attached for workout day tabs.");
+
+                 // Workout Location Toggles (Example for Monday - repeat for others)
+                 const daysWithToggles = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+                 daysWithToggles.forEach(day => {
+                     document.getElementById(`${day}-toggle-gym`)?.addEventListener('click', () => switchWorkoutLocation(day, 'gym'));
+                     document.getElementById(`${day}-toggle-home`)?.addEventListener('click', () => switchWorkoutLocation(day, 'home'));
+                 });
+                 console.log("Listeners attached for workout location toggles.");
+
+
+                // Fasting Buttons
+                document.getElementById('protocol-16-8-btn')?.addEventListener('click', () => selectFastProtocol('16:8'));
+                document.getElementById('protocol-18-6-btn')?.addEventListener('click', () => selectFastProtocol('18:6'));
+                document.getElementById('protocol-20-4-btn')?.addEventListener('click', () => selectFastProtocol('20:4'));
+                document.getElementById('start-fast-btn')?.addEventListener('click', startFast);
+                document.getElementById('end-fast-btn')?.addEventListener('click', endFast);
+                 console.log("Listeners attached for fasting buttons.");
+
+                // History Buttons
+                document.getElementById('load-history-btn')?.addEventListener('click', displayHistory);
+                document.getElementById('history-toggle-btn')?.addEventListener('click', toggleHistory);
+                 console.log("Listeners attached for history buttons.");
+
+                 // Checkboxes still use onclick in HTML for simplicity, as they were working
+
+                 console.log("All event listeners attached successfully.");
+
+            } catch (error) {
+                console.error("Error attaching event listeners:", error);
+            }
+        }
+
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                console.log("DOM loaded.");
+                loadStateAndSetupUI(); // Load state and set up the initial UI
+                attachEventListeners(); // Attach listeners AFTER functions are defined and initial UI is set
+                window.addEventListener('beforeunload', () => {
+                    console.log("Saving current state before unload...");
+                    saveCurrentState(); // Save the live state on exit
+                });
+            } catch (error) {
+                 console.error("Error during DOMContentLoaded setup:", error);
+                 document.body.innerHTML = `<div style="padding: 20px; text-align: center; color: red;"><h2>Application Error</h2><p>An error occurred while loading the tracker. Please try again later or clear application data.</p><pre>${error.message}</pre></div>`;
+            }
+        });
+    </script>
+</body>
+</html>
