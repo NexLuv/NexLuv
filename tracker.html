@@ -376,31 +376,244 @@
 
         <div id="skincare-section" class="section-content active">
              <div class="tabs">
-                 <div id="morning-tab" class="tab active-morning">☀️ Morning Routine</div>
+                    <div id="morning-tab" class="tab active-morning">☀️ Morning Routine</div>
                  <div id="evening-tab" class="tab inactive">🌙 Evening Routine</div>
              </div>
+
              <div id="morning-routine" class="routine">
                  <h2 class="routine-title">✨ MORNING SKINCARE ROUTINE</h2>
                  <div class="routine-purpose"><strong>Goal:</strong> Clean skin, antioxidant protection, hydration, and sun protection (Total time: ~6 minutes)</div>
-                 <div class="step"><div class="step-header"><div id="morning-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1. Cleanse</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div></div></div>
-                 <div class="step"><div class="step-header"><div id="morning-vitaminc" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Vitamin C Serum</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> TruSkin Vitamin C Serum</div></div></div>
-                 <div class="step"><div class="step-header"><div id="morning-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">3. Moisturize</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Daily Moisturizing Lotion</div></div></div>
-                 <div class="step"><div class="step-header"><div id="morning-sunscreen" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">4. Sunscreen</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> La Roche-Posay Anthelios Clear Skin SPF 60</div></div></div>
+
+                 <div class="step">
+                     <div class="step-header">
+                         <div id="morning-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">1. Cleanse</div>
+                         <div class="step-time">⏱️ 2 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div>
+                     </div>
+                     <div class="step-instructions">
+                         <strong class="what-you-need">What you need:</strong> <p>Just the cleanser + lukewarm water + a clean towel</p>
+                         <strong class="howto">How to do it:</strong>
+                         <p>Wet your face with lukewarm water (not hot!).</p>
+                         <p>Squeeze a dime-sized amount onto your fingertips.</p>
+                         <p>Gently rub all over your face (forehead, cheeks, nose, chin) for about 30–60 seconds.</p>
+                         <p>Rinse thoroughly with lukewarm water.</p>
+                         <p>Gently pat your face dry with a clean, soft towel. Do not rub.</p>
+                         <strong class="feel">Your skin should feel:</strong> <p>Clean but not tight. If it feels tight or squeaky, that’s too harsh—use less or shorten cleansing time.</p>
+                     </div>
+                 </div>
+
+                 <div class="step">
+                     <div class="step-header">
+                         <div id="morning-vitaminc" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">2. Vitamin C Serum</div>
+                         <div class="step-time">⏱️ 1 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> TruSkin Vitamin C Serum</div>
+                     </div>
+                     <div class="step-instructions">
+                         <strong class="what-you-need">What you need:</strong> <p>Clean hands, optionally a mirror</p>
+                         <strong class="howto">How to do it:</strong>
+                         <p>Make sure your face is dry (let it air dry for 30 seconds if needed).</p>
+                         <p>Apply 3–5 drops directly to your fingertips.</p>
+                         <p>Gently pat or press into your face and neck (don't rub in harsh circles).</p>
+                         <strong class="wait">Wait time:</strong> <p>1 minute to absorb before moving on.</p>
+                         <p class="tip">Avoid using other strong actives (like retinol or exfoliants) at the same time.</p>
+                     </div>
+                 </div>
+
+                 <div class="step">
+                     <div class="step-header">
+                         <div id="morning-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">3. Moisturize</div>
+                         <div class="step-time">⏱️ 1 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> CeraVe Daily Moisturizing Lotion</div>
+                     </div>
+                     <div class="step-instructions">
+                         <strong class="howto">How to do it:</strong>
+                         <p>Use a nickel-sized amount.</p>
+                         <p>Gently massage into your entire face and neck.</p>
+                         <p>Let it fully absorb (~30–60 seconds).</p>
+                         <strong class="feel">Why:</strong> <p>Locks in hydration and prevents water loss.</p>
+                     </div>
+                 </div>
+
+                 <div class="step">
+                     <div class="step-header">
+                         <div id="morning-sunscreen" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">4. Sunscreen</div>
+                         <div class="step-time">⏱️ 1 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> La Roche-Posay Anthelios Clear Skin SPF 60</div>
+                     </div>
+                     <div class="step-instructions">
+                          <strong class="what-you-need">What you need:</strong> <p>Just the sunscreen</p>
+                         <strong class="howto">How to do it:</strong>
+                         <p>Apply 2 full finger lengths of sunscreen to your face (that’s a good rule of thumb for the right amount).</p>
+                         <p>Dot it onto forehead, cheeks, nose, chin, then rub in gently and evenly.</p>
+                         <p>Don’t forget under your jawline, around your eyes, and on ears if exposed.</p>
+                         <strong class="important">Important:</strong> <p>If you’ll be outdoors, reapply every 2 hours.</p>
+                     </div>
+                 </div>
+
+                 <div class="summary-checklist">
+                     <h4>MORNING SUMMARY CHECKLIST:</h4>
+                     <p>✅ Cleanser</p>
+                     <p>✅ Vitamin C</p>
+                     <p>✅ Moisturizer</p>
+                     <p>✅ Sunscreen (must!)</p>
+                 </div>
              </div>
+
              <div id="evening-routine" class="routine hidden">
                  <h2 class="routine-title">🌙 EVENING SKINCARE ROUTINE</h2>
-                 <div class="routine-purpose"><strong>Goal:</strong> Clean skin, apply actives, hydrate, lock in moisture (Total time: 7–10 minutes)</div>
-                 <div class="treatment-buttons"><div id="retinoid-btn" class="treatment-btn">Retinoid</div><div id="exfoliant-btn" class="treatment-btn">Exfoliant</div><div id="slugging-btn" class="treatment-btn">Slugging</div></div>
-                 <div class="schedule-info"><div id="retinoid-schedule" class="schedule-item">Retinoid: Mon, Wed, Fri</div><div id="exfoliant-schedule" class="schedule-item">Exfoliant: Tue, Thu</div><div id="slugging-schedule" class="schedule-item">Slugging: Sat, Sun</div></div>
-                 <div class="step"><div class="step-header"><div id="evening-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1. Cleanse</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div></div></div>
-                 <div id="retinoid-step" class="step hidden"><div class="step-header"><div id="evening-treatment" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Retinoid)</div><div class="step-info">⏱️ 2-3 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> DiJerin Adapalene Gel (0.1%)</div></div></div>
-                 <div id="exfoliant-step" class="step hidden"><div class="step-header"><div id="evening-treatment-exfoliant" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Exfoliant)</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> The Ordinary Glycolic Acid 7% Toner</div></div></div>
-                 <div id="slugging-step" class="step hidden"><div class="step-header"><div id="evening-treatment-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Slugging Night)</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> No actives tonight</div></div></div>
-                 <div class="step"><div class="step-header"><div id="evening-hydration" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">3. Hydration</div><div class="step-info">⏱️ 1-2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> The Ordinary Hyaluronic Acid 2% + B5</div></div></div>
-                 <div class="step"><div class="step-header"><div id="evening-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">4. Moisturize</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe PM Moisturizing Lotion</div></div></div>
-                 <div id="evening-slug" class="step hidden"><div class="step-header"><div id="evening-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">5. Slugging Final Step</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> Vaseline + Silk/Satin Sleep Mask</div></div></div>
+                 <div class="routine-purpose"><strong>Goal:</strong> Clean skin, apply actives (retinoid or exfoliant), hydrate, lock in moisture (Total time: 7–10 minutes)</div>
+
+                 <div class="treatment-buttons">
+                     <div id="retinoid-btn" class="treatment-btn active">Retinoid</div>
+                     <div id="exfoliant-btn" class="treatment-btn">Exfoliant</div>
+                     <div id="slugging-btn" class="treatment-btn">Slugging</div>
+                 </div>
+                 <div class="schedule-info">
+                     <div id="retinoid-schedule" class="schedule-item">Retinoid: Mon, Wed, Fri</div>
+                     <div id="exfoliant-schedule" class="schedule-item">Exfoliant: Tue, Thu</div>
+                     <div id="slugging-schedule" class="schedule-item">Slugging: Sat, Sun</div>
+                 </div>
+
+                 <div class="step">
+                     <div class="step-header">
+                         <div id="evening-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">1. Cleanse</div>
+                         <div class="step-time">⏱️ 2 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div>
+                     </div>
+                     <div class="step-instructions">
+                         <strong class="what-you-need">What you need:</strong> <p>Just the cleanser + lukewarm water + a clean towel</p>
+                         <strong class="howto">How to do it:</strong>
+                         <p>Wet your face with lukewarm water (not hot!).</p>
+                         <p>Squeeze a dime-sized amount onto your fingertips.</p>
+                         <p>Gently rub all over your face for 30–60 seconds, ensuring you remove all makeup/SPF.</p>
+                         <p>Rinse thoroughly with lukewarm water.</p>
+                         <p>Gently pat your face dry with a clean, soft towel.</p>
+                         <strong class="important">Important:</strong> <p>Ensure all makeup, SPF, sweat, and dirt from the day are removed.</p>
+                     </div>
+                 </div>
+
+                 <div id="retinoid-step" class="step"> <div class="step-header">
+                         <div id="evening-treatment" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">2. Treatment (Retinoid)</div>
+                         <div class="step-time">⏱️ 2-3 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> DiJerin Adapalene Gel (0.1%)</div>
+                     </div>
+                     <div class="step-instructions">
+                         <strong class="howto">How to do it:</strong>
+                         <p>Wait 20 minutes after cleansing so your skin is fully dry.</p>
+                         <p>Apply a pea-sized amount to entire face, avoiding the eye area, corners of nose, and lips.</p>
+                         <strong class="tip">Tips:</strong>
+                         <p class="tip">Don’t mix with glycolic acid.</p>
+                         <p class="tip">If skin gets irritated, buffer it: apply moisturizer before and after the retinoid.</p>
+                     </div>
+                 </div>
+                 <div id="exfoliant-step" class="step hidden"> <div class="step-header">
+                         <div id="evening-treatment-exfoliant" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">2. Treatment (Exfoliant)</div>
+                         <div class="step-time">⏱️ 2 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> The Ordinary Glycolic Acid 7% Toner</div>
+                     </div>
+                     <div class="step-instructions">
+                         <strong class="howto">How to do it:</strong>
+                         <p>Pour a few drops onto a cotton pad.</p>
+                         <p>Gently swipe across face (avoiding eye area).</p>
+                         <p>Let absorb for 1 minute before next step.</p>
+                         <p class="tip">Do NOT mix with retinoid.</p>
+                     </div>
+                 </div>
+                 <div id="slugging-step" class="step hidden"> <div class="step-header">
+                         <div id="evening-treatment-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">2. Treatment (Slugging Night)</div>
+                         <div class="step-time">⏱️ 1 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> No actives tonight</div>
+                         <div>Pure hydration night for skin barrier repair</div>
+                     </div>
+                      <div class="step-instructions">
+                         <p>No acids or actives tonight. Focus on hydration and moisture barrier.</p>
+                     </div>
+                 </div>
+
+                 <div class="step">
+                     <div class="step-header">
+                         <div id="evening-hydration" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">3. Hydration</div>
+                         <div class="step-time">⏱️ 1-2 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> The Ordinary Hyaluronic Acid 2% + B5</div>
+                     </div>
+                      <div class="step-instructions">
+                         <strong class="howto">How to do it:</strong>
+                         <p>On damp skin (mist with water if needed), apply 2–3 drops.</p>
+                         <p>Pat gently all over your face.</p>
+                         <p>Let it sink in for 30–60 seconds.</p>
+                     </div>
+                 </div>
+
+                 <div class="step">
+                     <div class="step-header">
+                         <div id="evening-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">4. Moisturize</div>
+                         <div class="step-time">⏱️ 2 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> CeraVe PM Moisturizing Lotion</div>
+                     </div>
+                      <div class="step-instructions">
+                         <strong class="howto">How to do it:</strong>
+                         <p>Apply a nickel-sized amount all over your face.</p>
+                         <p>Let absorb fully.</p>
+                     </div>
+                 </div>
+
+                 <div id="evening-slug" class="step hidden"> <div class="step-header">
+                         <div id="evening-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div>
+                         <div class="step-title">5. Slugging Final Step</div>
+                         <div class="step-time">⏱️ 2 min</div>
+                     </div>
+                     <div class="product-details">
+                         <div class="product-name"><span class="heart">💖</span> Vaseline (petroleum jelly) + Silk/Satin Sleep Mask</div>
+                     </div>
+                      <div class="step-instructions">
+                         <strong class="howto">How to do it:</strong>
+                         <p>After moisturizing, apply a thin layer of Vaseline over your face.</p>
+                         <p>It should feel dewy but not greasy or heavy.</p>
+                         <p>Wear a satin sleep mask to protect pillowcases if needed.</p>
+                     </div>
+                 </div>
+
+                 <div class="summary-checklist">
+                     <h4>EVENING SUMMARY CHECKLIST:</h4>
+                     <p>✅ Cleanser</p>
+                     <p>✅ (Treatment: Retinoid OR Exfoliant OR Slugging — depending on day)</p>
+                     <p>✅ Hyaluronic Acid</p>
+                     <p>✅ Moisturizer</p>
+                     <p>✅ Slugging (if Saturday or Sunday)</p>
+                 </div>
              </div>
         </div>
+
 
         <div id="workout-section" class="section-content">
              <div class="day-tabs">
