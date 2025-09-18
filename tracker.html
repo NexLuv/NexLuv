@@ -45,7 +45,7 @@
             margin-top: 8px;
             font-size: 14px;
         }
-        /* Main section tabs */
+        /* Main section tabs (Skincare/Workout/Meals) */
         .main-tabs {
             display: flex;
             border-bottom: 1px solid #e5e7eb; /* Light gray border */
@@ -67,9 +67,9 @@
         }
         /* Specific active style for Meals tab */
          .main-tab#meals-main-tab.active {
-            background: #fffbeb; /* Light orange background */
-            color: #b45309; /* Dark orange text */
-            border-bottom-color: #f59e0b; /* Orange underline */
+            background: #fffbeb; /* Light yellow background */
+            color: #b45309; /* Dark yellow text */
+            border-bottom-color: #f59e0b; /* Yellow underline */
         }
         /* Skincare routine tabs (Morning/Evening) */
         .tabs {
@@ -96,7 +96,7 @@
             background-color: #e0e7ff; /* Light blue */
             color: #4f46e5; /* Dark blue/purple */
         }
-        /* Day tabs (for Workout and Meals) */
+        /* Day tabs (for workout and meals) */
         .day-tabs {
             display: flex;
             flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
@@ -114,15 +114,15 @@
             color: #9ca3af;
             transition: background-color 0.2s, color 0.2s;
         }
-        .day-tab.active.workout-active {
+        .day-tab.workout-active {
             background-color: #ede9fe; /* Light purple */
             color: #6d28d9; /* Dark purple */
             border-bottom: 3px solid #6d28d9; /* Purple underline */
         }
-        .day-tab.active.meals-active {
-            background-color: #fff7ed; /* Light orange */
-            color: #9a3412; /* Dark orange */
-            border-bottom: 3px solid #f97316; /* Orange underline */
+        .day-tab.meals-active {
+            background-color: #fef9c3; /* Lighter yellow */
+            color: #854d0e; /* Darker yellow */
+            border-bottom: 3px solid #facc15; /* Yellow underline */
         }
         /* Routine content styling */
         .routine {
@@ -182,7 +182,7 @@
             background-color: #dbeafe; /* Light blue background */
             font-weight: bold;
         }
-        /* Step styling (for skincare, workout items, meal items) */
+        /* Step styling (for skincare and workout items) */
         .step {
             background-color: #f5f3ff; /* Very light purple */
             padding: 15px;
@@ -216,7 +216,7 @@
             font-weight: bold;
             flex-grow: 1; /* Allow title to take available space */
         }
-        .step-time {
+        .step-info {
             font-size: 12px;
             color: #6b7280;
             margin-left: 10px;
@@ -231,6 +231,14 @@
         }
         .product-name {
             color: #111827; /* Dark gray/black */
+        }
+        /* Step Instructions Styling */
+        .step-instructions {
+            font-size: 13px;
+            color: #4b5563; /* Darker gray */
+            margin-top: 8px;
+            padding-left: 30px; /* Align with product details */
+            line-height: 1.5;
         }
         /* Summary Checklist Styling */
         .summary-checklist {
@@ -252,7 +260,7 @@
             color: #4338ca; /* Medium indigo */
         }
 
-        /* Progress bar section */
+        /* Progress bar section (Main progress for Skincare/Workout/Meals) */
         .progress-section {
             padding: 15px 20px;
             border-bottom: 1px solid #e5e7eb;
@@ -276,29 +284,39 @@
             transition: width 0.3s ease-in-out; /* Smooth width transition */
             width: 0%; /* Initial width */
         }
-        /* Workout section specific styling */
-        .workout-section, .meal-section {
+        /* Day section specific styling */
+        .day-section {
             padding: 15px;
         }
-        .workout-time-title, .meal-time-title {
+        .section-block {
+            background-color: #f3f4f6; /* Light gray background for time blocks */
+            padding: 15px; /* Increased padding */
+            border-radius: 8px; /* Match step radius */
+            margin-bottom: 15px;
+        }
+        .section-block-title {
             font-weight: bold;
             color: #4b5563; /* Darker gray */
-            margin-bottom: 10px;
+            margin-bottom: 10px; /* Increased margin */
             display: flex;
             align-items: center;
-            font-size: 16px;
+            font-size: 16px; /* Slightly larger title */
         }
-        .workout-time-title::before { content: "⏰"; margin-right: 8px; font-size: 18px; }
-        .evening-workout-container > .workout-time-title::before { content: "🌙"; }
-
-        /* Meal Section Specifics */
-        .meal-block { background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .meal-block .step { background-color: #fff; } /* Make meal items have white background */
-        .meal-time-title::before { content: "🍴"; margin-right: 8px; font-size: 18px; }
-
-        /* Utility class to hide elements */
+        .section-block-title::before {
+            margin-right: 8px; /* Increased spacing */
+            font-size: 18px;
+        }
+        .evening-workout-container > .section-block-title::before { content: "🌙"; }
+        .meal-block > .section-block-title::before { content: " nutritio" }
+        .meal-1-title::before { content: '☕'; }
+        .meal-2-title::before { content: '🥗'; }
+        .meal-3-title::before { content: ' snacking' }
+        .meal-4-title::before { content: '🍽️'; }
+        .meal-5-title::before { content: '🥄'; }
+        
+        .item { margin-bottom: 10px; padding-left: 0; position: relative; }
+        .item::before { content: none; }
         .hidden { display: none !important; }
-        /* Notice text at the bottom */
         .notice {
             text-align: center;
             font-size: 12px;
@@ -307,13 +325,11 @@
             background-color: #f9fafb; /* Very light gray */
             border-top: 1px solid #e5e7eb;
         }
-        /* Heart emoji styling */
         .heart { color: #ec4899; }
-        /* Active/inactive content sections */
-        .section-content, .day-content { display: none; }
-        .section-content.active, .day-content.active { display: block; }
-
-        /* Objective box styling */
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+        .day-content { display: none; }
+        .day-content.active { display: block; }
         .objective {
             background-color: #fef3c7;
             padding: 10px 15px;
@@ -322,7 +338,6 @@
             font-size: 14px;
             border: 1px solid #fde68a;
         }
-        /* Workout Location Toggle Styles */
         .location-toggle { display: flex; gap: 8px; margin-bottom: 15px; margin-top: -5px; }
         .toggle-option {
             flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 15px;
@@ -330,21 +345,9 @@
             font-size: 13px; font-weight: bold; transition: all 0.2s;
         }
         .toggle-option.active { background: #8b5cf6; color: white; border-color: #7c3aed; }
-        /* Workout Exercise Blocks Styles */
         .exercise-block { padding-top: 10px; border-top: 1px dashed #d1d5db; margin-top: 10px; }
         .exercise-block.hidden { display: none; }
         .exercise-block.active { display: block; }
-         /* --- History Section Styles --- */
-         #history-toggle-section { text-align: center; padding: 15px; border-top: 1px solid #e5e7eb; background-color: #f9fafb; }
-         .history-btn { padding: 8px 16px; border: 1px solid #6b7280; border-radius: 20px; background-color: white; color: #4b5563; cursor: pointer; font-weight: bold; transition: all 0.2s; margin-left: 10px; }
-         .history-btn:hover { background-color: #f3f4f6; }
-         #history-display-section { padding: 20px; background-color: #f9fafb; border-top: 1px dashed #e5e7eb; }
-         #history-display-section h3 { text-align: center; color: #4b5563; margin-top: 0; margin-bottom: 15px; }
-         #history-date-input { padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
-         .history-summary-section { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #e5e7eb; }
-         .history-summary-section:last-child { border-bottom: none; margin-bottom: 0; }
-         .history-summary-title { font-weight: bold; color: #374151; margin-bottom: 5px; }
-         .history-summary-details { font-size: 14px; color: #4b5563; }
     </style>
 </head>
 <body>
@@ -358,7 +361,7 @@
         <div class="main-tabs">
             <div id="skincare-main-tab" class="main-tab active">💧 Skincare</div>
             <div id="workout-main-tab" class="main-tab">💪 Workout</div>
-            <div id="meals-main-tab" class="main-tab">🍱 Meals</div>
+            <div id="meals-main-tab" class="main-tab">🍽️ Meals</div>
         </div>
 
         <div id="main-progress-section" class="progress-section">
@@ -379,176 +382,179 @@
              <div id="morning-routine" class="routine">
                  <h2 class="routine-title">✨ MORNING SKINCARE ROUTINE</h2>
                  <div class="routine-purpose"><strong>Goal:</strong> Clean skin, antioxidant protection, hydration, and sun protection (Total time: ~6 minutes)</div>
-                 <div class="step"><div class="step-header"><div id="morning-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1. Cleanse</div><div class="step-time">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div></div></div>
-                 <div class="step"><div class="step-header"><div id="morning-vitaminc" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Vitamin C Serum</div><div class="step-time">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> TruSkin Vitamin C Serum</div></div></div>
-                 <div class="step"><div class="step-header"><div id="morning-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">3. Moisturize</div><div class="step-time">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Daily Moisturizing Lotion</div></div></div>
-                 <div class="step"><div class="step-header"><div id="morning-sunscreen" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">4. Sunscreen</div><div class="step-time">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> La Roche-Posay Anthelios Clear Skin SPF 60</div></div></div>
+                 <div class="step"><div class="step-header"><div id="morning-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1. Cleanse</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div></div></div>
+                 <div class="step"><div class="step-header"><div id="morning-vitaminc" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Vitamin C Serum</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> TruSkin Vitamin C Serum</div></div></div>
+                 <div class="step"><div class="step-header"><div id="morning-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">3. Moisturize</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Daily Moisturizing Lotion</div></div></div>
+                 <div class="step"><div class="step-header"><div id="morning-sunscreen" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">4. Sunscreen</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> La Roche-Posay Anthelios Clear Skin SPF 60</div></div></div>
              </div>
              <div id="evening-routine" class="routine hidden">
                  <h2 class="routine-title">🌙 EVENING SKINCARE ROUTINE</h2>
                  <div class="routine-purpose"><strong>Goal:</strong> Clean skin, apply actives, hydrate, lock in moisture (Total time: 7–10 minutes)</div>
                  <div class="treatment-buttons"><div id="retinoid-btn" class="treatment-btn">Retinoid</div><div id="exfoliant-btn" class="treatment-btn">Exfoliant</div><div id="slugging-btn" class="treatment-btn">Slugging</div></div>
                  <div class="schedule-info"><div id="retinoid-schedule" class="schedule-item">Retinoid: Mon, Wed, Fri</div><div id="exfoliant-schedule" class="schedule-item">Exfoliant: Tue, Thu</div><div id="slugging-schedule" class="schedule-item">Slugging: Sat, Sun</div></div>
-                 <div class="step"><div class="step-header"><div id="evening-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1. Cleanse</div><div class="step-time">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div></div></div>
-                 <div id="retinoid-step" class="step hidden"><div class="step-header"><div id="evening-treatment-retinoid" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Retinoid)</div><div class="step-time">⏱️ 2-3 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> DiJerin Adapalene Gel (0.1%)</div></div></div>
-                 <div id="exfoliant-step" class="step hidden"><div class="step-header"><div id="evening-treatment-exfoliant" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Exfoliant)</div><div class="step-time">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> The Ordinary Glycolic Acid 7% Toner</div></div></div>
-                 <div id="slugging-step" class="step hidden"><div class="step-header"><div id="evening-treatment-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Slugging Night)</div><div class="step-time">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> No actives tonight</div></div></div>
-                 <div class="step"><div class="step-header"><div id="evening-hydration" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">3. Hydration</div><div class="step-time">⏱️ 1-2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> The Ordinary Hyaluronic Acid 2% + B5</div></div></div>
-                 <div class="step"><div class="step-header"><div id="evening-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">4. Moisturize</div><div class="step-time">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe PM Moisturizing Lotion</div></div></div>
-                 <div id="evening-slug" class="step hidden"><div class="step-header"><div id="evening-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">5. Slugging Final Step</div><div class="step-time">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> Vaseline + Silk/Satin Sleep Mask</div></div></div>
+                 <div class="step"><div class="step-header"><div id="evening-cleanse" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1. Cleanse</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe Foaming Facial Cleanser</div></div></div>
+                 <div id="retinoid-step" class="step hidden"><div class="step-header"><div id="evening-treatment" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Retinoid)</div><div class="step-info">⏱️ 2-3 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> DiJerin Adapalene Gel (0.1%)</div></div></div>
+                 <div id="exfoliant-step" class="step hidden"><div class="step-header"><div id="evening-treatment-exfoliant" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Exfoliant)</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> The Ordinary Glycolic Acid 7% Toner</div></div></div>
+                 <div id="slugging-step" class="step hidden"><div class="step-header"><div id="evening-treatment-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2. Treatment (Slugging Night)</div><div class="step-info">⏱️ 1 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> No actives tonight</div></div></div>
+                 <div class="step"><div class="step-header"><div id="evening-hydration" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">3. Hydration</div><div class="step-info">⏱️ 1-2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> The Ordinary Hyaluronic Acid 2% + B5</div></div></div>
+                 <div class="step"><div class="step-header"><div id="evening-moisturize" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">4. Moisturize</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> CeraVe PM Moisturizing Lotion</div></div></div>
+                 <div id="evening-slug" class="step hidden"><div class="step-header"><div id="evening-slugging" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">5. Slugging Final Step</div><div class="step-info">⏱️ 2 min</div></div><div class="product-details"><div class="product-name"><span class="heart">💖</span> Vaseline + Silk/Satin Sleep Mask</div></div></div>
              </div>
         </div>
 
         <div id="workout-section" class="section-content">
              <div class="day-tabs">
-                  <div id="monday-workout-tab" class="day-tab workout-active">Mon</div>
-                  <div id="tuesday-workout-tab" class="day-tab workout-active">Tue</div>
-                  <div id="wednesday-workout-tab" class="day-tab workout-active">Wed</div>
-                  <div id="thursday-workout-tab" class="day-tab workout-active">Thu</div>
-                  <div id="friday-workout-tab" class="day-tab workout-active">Fri</div>
-                  <div id="saturday-workout-tab" class="day-tab workout-active">Sat</div>
-                  <div id="sunday-workout-tab" class="day-tab workout-active">Sun</div>
+                  <div id="monday-tab" class="day-tab">Mon</div>
+                  <div id="tuesday-tab" class="day-tab">Tue</div>
+                  <div id="wednesday-tab" class="day-tab">Wed</div>
+                  <div id="thursday-tab" class="day-tab">Thu</div>
+                  <div id="friday-tab" class="day-tab">Fri</div>
+                  <div id="saturday-tab" class="day-tab">Sat</div>
+                  <div id="sunday-tab" class="day-tab">Sun</div>
              </div>
              <div class="objective"> <strong>Workout Plan Objective:</strong> Maximize lower body hypertrophy and induce upper body atrophy while prioritizing fat loss.</div>
              
-             <div id="monday-workout" class="day-content workout">
-                 <div class="workout-section"><h2 class="routine-title">Monday – Heavy Lifting (Workout A)</h2><div class="workout-time evening-workout-container"><div class="workout-time-title">Main Gym Session</div><div class="location-toggle"><div id="monday-toggle-gym" class="toggle-option">📍 Gym</div><div id="monday-toggle-home" class="toggle-option">🏠 Home</div></div><div id="monday-gym-exercises" class="exercise-block"><div class="step"><div class="step-header"><div id="mon-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Barbell Back Squat: 4 sets of 8-12 reps (2 RIR)</div></div></div><div class="step"><div class="step-header"><div id="mon-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Romanian Deadlift: 3 sets of 10-15 reps (2 RIR)</div></div></div><div class="step"><div class="step-header"><div id="mon-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Leg Press: 3 sets of 10-15 reps (1 RIR)</div></div></div><div class="step"><div class="step-header"><div id="mon-gym-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Walking Lunges: 3 sets of 12-15 reps/leg (2 RIR)</div></div></div><div class="step"><div class="step-header"><div id="mon-gym-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Seated Leg Curls: 3 sets of 15-20 reps (0 RIR)</div></div></div><div class="step"><div class="step-header"><div id="mon-gym-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Standing Calf Raises: 4 sets of 15-20 reps (0 RIR)</div></div></div></div><div id="monday-home-exercises" class="exercise-block hidden"><div class="step"><div class="step-header"><div id="mon-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Dumbbell Goblet Squats: 4 sets of 10-15 reps</div></div></div></div></div></div>
-             </div>
-             <div id="tuesday-workout" class="day-content workout">
-                 <div class="workout-section"><h2 class="routine-title">Tuesday – Cardio & Corrective</h2><div class="workout-time"><div class="workout-time-title">LISS Cardio & Mandatory Corrective Routine</div><div class="step"><div class="step-header"><div id="tue-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">LISS Cardio: 30-45 min (Incline Walk / Elliptical)</div></div></div><div class="step"><div class="step-header"><div id="tue-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Core: Plank - 3 sets of 30-60 sec holds</div></div></div><div class="step"><div class="step-header"><div id="tue-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Core: Dead Bug - 3 sets of 45-60 sec</div></div></div><div class="step"><div class="step-header"><div id="tue-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Scapular Health: Band Pull-Aparts - 3 sets of 15-20 reps</div></div></div><div class="step"><div class="step-header"><div id="tue-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Scapular Health: Face Pulls (light band) - 3 sets of 15-20 reps</div></div></div><div class="step"><div class="step-header"><div id="tue-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mobility: Wall Slides - 3 sets of 10-15 reps</div></div></div></div></div>
-             </div>
-             <div id="wednesday-workout" class="day-content workout">
-                 <div class="workout-section"><h2 class="routine-title">Wednesday – Heavy Lifting (Workout B)</h2><div class="workout-time evening-workout-container"><div class="workout-time-title">Main Gym Session</div><div class="location-toggle"><div id="wednesday-toggle-gym" class="toggle-option">📍 Gym</div><div id="wednesday-toggle-home" class="toggle-option">🏠 Home</div></div><div id="wednesday-gym-exercises" class="exercise-block"><div class="step"><div class="step-header"><div id="wed-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Barbell Hip Thrust: 4 sets of 8-12 reps (2 RIR)</div></div></div><div class="step"><div class="step-header"><div id="wed-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Bulgarian Split Squat: 3 sets of 10-15 reps/leg (1 RIR)</div></div></div></div></div></div>
-             </div>
-             <div id="thursday-workout" class="day-content workout">
-                 <div class="workout-section"><h2 class="routine-title">Thursday – Cardio & Corrective</h2><div class="workout-time"><div class="workout-time-title">LISS Cardio & Mandatory Corrective Routine</div><div class="step"><div class="step-header"><div id="thu-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">LISS Cardio: 30-45 min (Incline Walk / Elliptical)</div></div></div><div class="step"><div class="step-header"><div id="thu-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Core: Side Plank - 3 sets of 30-45 sec holds/side</div></div></div></div></div>
-             </div>
-             <div id="friday-workout" class="day-content workout">
-                 <div class="workout-section"><h2 class="routine-title">Friday – Heavy Lifting (Workout C)</h2><div class="workout-time evening-workout-container"><div class="workout-time-title">Main Gym Session</div><div class="location-toggle"><div id="friday-toggle-gym" class="toggle-option">📍 Gym</div><div id="friday-toggle-home" class="toggle-option">🏠 Home</div></div><div id="friday-gym-exercises" class="exercise-block"><div class="step"><div class="step-header"><div id="fri-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Leg Extensions (Pre-exhaust): 3 sets of 20-30 reps (0 RIR)</div></div></div><div class="step"><div class="step-header"><div id="fri-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Goblet Squat (Heels Elevated): 4 sets of 15-20 reps (1 RIR)</div></div></div></div></div></div>
-             </div>
-             <div id="saturday-workout" class="day-content workout">
-                 <div class="workout-section"><h2 class="routine-title">Saturday – Active Recovery</h2><div class="workout-time"><div class="workout-time-title">Optional Light Activity</div><div class="step"><div class="step-header"><div id="sat-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">LISS Cardio / Light Walk: 30-45 min</div></div></div></div></div>
-             </div>
-             <div id="sunday-workout" class="day-content workout">
-                 <div class="workout-section"><h2 class="routine-title">Sunday – Full Rest & Prep</h2><div class="workout-time"><div class="workout-time-title">Primary Mission: Recovery</div><div class="step"><div class="step-header"><div id="sun-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Complete Rest Day</div></div></div><div class="step"><div class="step-header"><div id="sun-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Meal Prep for the Upcoming Week</div></div></div></div></div>
-             </div>
+             <div id="monday-workout" class="day-content"><div class="day-section"><h2 class="routine-title">Monday – Heavy Lifting (Workout A)</h2><div class="section-block evening-workout-container"><div class="section-block-title">Main Gym Session</div><div class="location-toggle"><div id="monday-toggle-gym" class="toggle-option">📍 Gym</div><div id="monday-toggle-home" class="toggle-option">🏠 Home</div></div><div id="monday-gym-exercises" class="exercise-block"><div class="item step"><div class="step-header"><div id="mon-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Barbell Back Squat: 4 sets of 8-12 reps (2 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="mon-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Romanian Deadlift: 3 sets of 10-15 reps (2 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="mon-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Leg Press: 3 sets of 10-15 reps (1 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="mon-gym-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Walking Lunges: 3 sets of 12-15 reps/leg (2 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="mon-gym-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Seated Leg Curls: 3 sets of 15-20 reps (0 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="mon-gym-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Standing Calf Raises: 4 sets of 15-20 reps (0 RIR)</div></div></div></div><div id="monday-home-exercises" class="exercise-block"><div class="item step"><div class="step-header"><div id="mon-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Dumbbell Goblet Squats: 4 sets of 10-15 reps</div></div></div></div></div></div></div>
+             <div id="tuesday-workout" class="day-content"><div class="day-section"><h2 class="routine-title">Tuesday – Cardio & Corrective</h2><div class="section-block"><div class="section-block-title">LISS Cardio & Mandatory Corrective Routine</div><div class="item step"><div class="step-header"><div id="tue-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">LISS Cardio: 30-45 min (Incline Walk / Elliptical)</div></div></div><div class="item step"><div class="step-header"><div id="tue-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Core: Plank - 3 sets of 30-60 sec holds</div></div></div><div class="item step"><div class="step-header"><div id="tue-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Core: Dead Bug - 3 sets of 45-60 sec</div></div></div><div class="item step"><div class="step-header"><div id="tue-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Scapular Health: Band Pull-Aparts - 3 sets of 15-20 reps</div></div></div><div class="item step"><div class="step-header"><div id="tue-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Scapular Health: Face Pulls (light band) - 3 sets of 15-20 reps</div></div></div><div class="item step"><div class="step-header"><div id="tue-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mobility: Wall Slides - 3 sets of 10-15 reps</div></div></div></div></div></div>
+             <div id="wednesday-workout" class="day-content"><div class="day-section"><h2 class="routine-title">Wednesday – Heavy Lifting (Workout B)</h2><div class="section-block evening-workout-container"><div class="section-block-title">Main Gym Session</div><div class="location-toggle"><div id="wednesday-toggle-gym" class="toggle-option">📍 Gym</div><div id="wednesday-toggle-home" class="toggle-option">🏠 Home</div></div><div id="wednesday-gym-exercises" class="exercise-block"><div class="item step"><div class="step-header"><div id="wed-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Barbell Hip Thrust: 4 sets of 8-12 reps (2 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="wed-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Bulgarian Split Squat: 3 sets of 10-15 reps/leg (1 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="wed-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Leg Extensions: 3 sets of 15-20 reps (0 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="wed-gym-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Lying Leg Curls: 3 sets of 15-20 reps (0 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="wed-gym-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Hip Abduction Machine: 3 sets of 20-25 reps (0 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="wed-gym-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Seated Calf Raises: 4 sets of 20-25 reps (0 RIR)</div></div></div></div><div id="wednesday-home-exercises" class="exercise-block"><div class="item step"><div class="step-header"><div id="wed-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Dumbbell Hip Thrust: 4 sets of 10-15 reps</div></div></div></div></div></div></div>
+             <div id="thursday-workout" class="day-content"><div class="day-section"><h2 class="routine-title">Thursday – Cardio & Corrective</h2><div class="section-block"><div class="section-block-title">LISS Cardio & Mandatory Corrective Routine</div><div class="item step"><div class="step-header"><div id="thu-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">LISS Cardio: 30-45 min (Incline Walk / Elliptical)</div></div></div><div class="item step"><div class="step-header"><div id="thu-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Core: Side Plank - 3 sets of 30-45 sec holds/side</div></div></div><div class="item step"><div class="step-header"><div id="thu-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Core: Bird-Dog - 3 sets of 10-12 slow reps/side</div></div></div><div class="item step"><div class="step-header"><div id="thu-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Scapular Health: Band Pull-Aparts - 3 sets of 15-20 reps</div></div></div><div class="item step"><div class="step-header"><div id="thu-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Scapular Health: Face Pulls (light band) - 3 sets of 15-20 reps</div></div></div><div class="item step"><div class="step-header"><div id="thu-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mobility: Cat-Cow / Thoracic Rotations</div></div></div></div></div></div>
+             <div id="friday-workout" class="day-content"><div class="day-section"><h2 class="routine-title">Friday – Heavy Lifting (Workout C)</h2><div class="section-block evening-workout-container"><div class="section-block-title">Main Gym Session</div><div class="location-toggle"><div id="friday-toggle-gym" class="toggle-option">📍 Gym</div><div id="friday-toggle-home" class="toggle-option">🏠 Home</div></div><div id="friday-gym-exercises" class="exercise-block"><div class="item step"><div class="step-header"><div id="fri-gym-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Leg Extensions (Pre-exhaust): 3 sets of 20-30 reps (0 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="fri-gym-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Goblet Squat (Heels Elevated): 4 sets of 15-20 reps (1 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="fri-gym-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Single-Leg Leg Press: 3 sets of 12-15 reps/leg (1 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="fri-gym-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Glute Ham Raise (or Nordic Curls): 4 sets to failure (0 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="fri-gym-5" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Standing Calf Raises: 4 sets of 20-25 reps (0 RIR)</div></div></div><div class="item step"><div class="step-header"><div id="fri-gym-6" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Seated Calf Raises: 4 sets of 20-25 reps (0 RIR)</div></div></div></div><div id="friday-home-exercises" class="exercise-block"><div class="item step"><div class="step-header"><div id="fri-home-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Banded Leg Extensions (Pre-exhaust): 3 sets to failure</div></div></div></div></div></div></div>
+             <div id="saturday-workout" class="day-content"><div class="day-section"><h2 class="routine-title">Saturday – Active Recovery</h2><div class="section-block"><div class="section-block-title">Optional Light Activity</div><div class="item step"><div class="step-header"><div id="sat-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">LISS Cardio / Light Walk: 30-45 min</div></div></div><div class="item step"><div class="step-header"><div id="sat-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Full Body Stretching</div></div></div><div class="item step"><div class="step-header"><div id="sat-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Foam Rolling</div></div></div></div></div></div>
+             <div id="sunday-workout" class="day-content"><div class="day-section"><h2 class="routine-title">Sunday – Full Rest & Prep</h2><div class="section-block"><div class="section-block-title">Primary Mission: Recovery</div><div class="item step"><div class="step-header"><div id="sun-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Complete Rest Day</div></div></div><div class="item step"><div class="step-header"><div id="sun-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Meal Prep for the Upcoming Week</div></div></div><div class="item step"><div class="step-header"><div id="sun-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Monthly: Track Measurements</div></div></div></div></div></div>
         </div>
-        
+
         <div id="meals-section" class="section-content">
             <div class="day-tabs">
-                <div id="monday-meals-tab" class="day-tab meals-active">Mon</div>
-                <div id="tuesday-meals-tab" class="day-tab meals-active">Tue</div>
-                <div id="wednesday-meals-tab" class="day-tab meals-active">Wed</div>
-                <div id="thursday-meals-tab" class="day-tab meals-active">Thu</div>
-                <div id="friday-meals-tab" class="day-tab meals-active">Fri</div>
-                <div id="saturday-meals-tab" class="day-tab meals-active">Sat</div>
-                <div id="sunday-meals-tab" class="day-tab meals-active">Sun</div>
+                <div id="monday-meal-tab" class="day-tab">Mon</div>
+                <div id="tuesday-meal-tab" class="day-tab">Tue</div>
+                <div id="wednesday-meal-tab" class="day-tab">Wed</div>
+                <div id="thursday-meal-tab" class="day-tab">Thu</div>
+                <div id="friday-meal-tab" class="day-tab">Fri</div>
+                <div id="saturday-meal-tab" class="day-tab">Sat</div>
+                <div id="sunday-meal-tab" class="day-tab">Sun</div>
             </div>
-            <div class="objective"><strong>Nutritional Objective:</strong> High Protein, Carb Cycling to fuel workouts and maximize fat loss.</div>
             
-            <div id="monday-meals" class="day-content meals">
-                <div class="meal-section"><h2 class="routine-title">Monday – Training Day Fuel</h2>
-                    <div class="meal-block"><div class="meal-time-title">Meal 1: Protein Latte</div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-1a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-1b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Unsweetened Almond Milk</div></div></div>
+            <div id="monday-meals" class="day-content">
+                <div class="day-section">
+                    <h2 class="routine-title">Monday – Training Day Fuel Plan</h2>
+                    <div class="routine-purpose"><strong>Totals:</strong> ~1870 Calories | 190g Protein | 165g Carbs | 50g Fat</div>
+                    
+                    <div class="section-block meal-block"><div class="section-block-title meal-1-title">Meal 1: Protein Latte</div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-1-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-1-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Unsweetened Almond Milk: 1 cup (240ml)</div><div class="step-info">~40 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 2: Girly Macro Bowl</div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-2a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Grilled Chicken Breast</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-2b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Quinoa</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-2c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Spinach, Tomatoes, Cucumber</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-2-title">Meal 2: Girly Macro Bowl</div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-2-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Grilled Chicken Breast: 7 oz (200g)</div><div class="step-info">~320 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-2-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Quinoa, cooked: 1 cup (185g)</div><div class="step-info">~220 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-2-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Spinach, Tomatoes, Cucumber</div><div class="step-info">~20 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-2-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Light Vinaigrette: 2 tbsp (30ml)</div><div class="step-info">~60 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 3: Pre-Workout Fuel</div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-3a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2 Brown Rice Cakes</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-3b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2 tbsp Powdered Peanut Butter</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-3c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 medium Banana</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-3-title">Meal 3: Pre-Workout Fuel</div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-3-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Brown Rice Cakes: 2 cakes</div><div class="step-info">~140 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-3-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Powdered Peanut Butter: 2 tbsp (16g)</div><div class="step-info">~70 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-3-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Medium Banana: 1</div><div class="step-info">~105 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 4: Post-Workout Recovery</div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-4a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Baked Salmon</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-4b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 medium Sweet Potato</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-4c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Steamed Broccoli</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-4-title">Meal 4: Post-Workout Recovery</div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-4-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Baked Salmon: 7 oz (200g)</div><div class="step-info">~400 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-4-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Sweet Potato, baked: 1 medium</div><div class="step-info">~115 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-4-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Steamed Broccoli: 1 cup</div><div class="step-info">~30 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 5: Evening Snack</div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-5a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1.5 cups Greek Yogurt</div></div></div>
-                        <div class="step"><div class="step-header"><div id="mon-meal-5b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/2 cup Mixed Berries</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-5-title">Meal 5: Evening Snack</div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-5-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Non-Fat Greek Yogurt: 1.5 cups (340g)</div><div class="step-info">~195 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="mon-meal-5-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Berries: 1/2 cup</div><div class="step-info">~30 cal</div></div></div>
                     </div>
                 </div>
             </div>
-            
-            <div id="tuesday-meals" class="day-content meals">
-                 <div class="meal-section"><h2 class="routine-title">Tuesday – Rest Day Fuel</h2>
-                    <div class="meal-block"><div class="meal-time-title">Meal 1: Protein Latte</div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-1a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey</div></div></div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-1b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Unsweetened Almond Milk</div></div></div>
+
+            <div id="tuesday-meals" class="day-content">
+                 <div class="day-section">
+                    <h2 class="routine-title">Tuesday – Rest Day Fuel Plan</h2>
+                    <div class="routine-purpose"><strong>Totals:</strong> ~1500 Calories | 212g Protein | 40g Carbs | 54g Fat</div>
+                     <div class="section-block meal-block"><div class="section-block-title meal-1-title">Meal 1: Protein Latte</div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-1-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-1-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Unsweetened Almond Milk: 1 cup (240ml)</div><div class="step-info">~40 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 2: Big Girly Salad</div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-2a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Grilled Chicken Breast</div></div></div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-2b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div></div></div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-2c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/4 Avocado</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-2-title">Meal 2: Big Girly Salad</div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-2-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Grilled Chicken Breast: 7 oz (200g)</div><div class="step-info">~320 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-2-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div><div class="step-info">~40 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-2-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Avocado: 1/4 medium</div><div class="step-info">~80 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-2-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Light Vinaigrette: 2 tbsp (30ml)</div><div class="step-info">~60 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 3: Chocolate Mousse</div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-3a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1.5 cups Greek Yogurt</div></div></div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-3b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/2 scoop Rule One Whey</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-3-title">Meal 3: High-Protein Mousse</div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-3-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Non-Fat Greek Yogurt: 1.5 cups (340g)</div><div class="step-info">~195 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-3-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1/2 scoop (17g)</div><div class="step-info">~65 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 4: Lean & Green Dinner</div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-4a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">8 oz Baked Cod</div></div></div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-4b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 tbsp Olive Oil</div></div></div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-4c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-4-title">Meal 4: Lean & Green</div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-4-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Baked Cod: 8 oz (227g)</div><div class="step-info">~210 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-4-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Olive Oil: 1 tbsp (15ml)</div><div class="step-info">~120 cal</div></div></div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-4-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus: 1 bunch</div><div class="step-info">~40 cal</div></div></div>
                     </div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 5: Final Protein Hit</div>
-                        <div class="step"><div class="step-header"><div id="tue-meal-5a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey Shake</div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-5-title">Meal 5: Final Protein Hit</div>
+                        <div class="item step"><div class="step-header"><div id="tue-meal-5-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div>
                     </div>
+                 </div>
+            </div>
+
+            <div id="wednesday-meals" class="day-content">
+                 <div class="day-section">
+                    <h2 class="routine-title">Wednesday – Training Day Fuel Plan</h2>
+                    <div class="routine-purpose"><strong>Totals:</strong> ~1870 Calories | 190g Protein | 165g Carbs | 50g Fat</div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-1-title">Meal 1: Protein Latte</div><div class="item step"><div class="step-header"><div id="wed-meal-1-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-1-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Unsweetened Almond Milk: 1 cup (240ml)</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-2-title">Meal 2: Girly Macro Bowl</div><div class="item step"><div class="step-header"><div id="wed-meal-2-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Grilled Chicken Breast: 7 oz (200g)</div><div class="step-info">~320 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-2-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Quinoa, cooked: 1 cup (185g)</div><div class="step-info">~220 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-2-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Spinach, Tomatoes, Cucumber</div><div class="step-info">~20 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-2-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Light Vinaigrette: 2 tbsp (30ml)</div><div class="step-info">~60 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-3-title">Meal 3: Pre-Workout Fuel</div><div class="item step"><div class="step-header"><div id="wed-meal-3-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Brown Rice Cakes: 2 cakes</div><div class="step-info">~140 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-3-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Powdered Peanut Butter: 2 tbsp (16g)</div><div class="step-info">~70 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-3-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Medium Banana: 1</div><div class="step-info">~105 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-4-title">Meal 4: Post-Workout Recovery</div><div class="item step"><div class="step-header"><div id="wed-meal-4-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Baked Salmon: 7 oz (200g)</div><div class="step-info">~400 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-4-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Sweet Potato, baked: 1 medium</div><div class="step-info">~115 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-4-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Steamed Broccoli: 1 cup</div><div class="step-info">~30 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-5-title">Meal 5: Evening Snack</div><div class="item step"><div class="step-header"><div id="wed-meal-5-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Non-Fat Greek Yogurt: 1.5 cups (340g)</div><div class="step-info">~195 cal</div></div></div><div class="item step"><div class="step-header"><div id="wed-meal-5-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Berries: 1/2 cup</div><div class="step-info">~30 cal</div></div></div></div>
                 </div>
             </div>
             
-             <div id="wednesday-meals" class="day-content meals">
-                <div class="meal-section"><h2 class="routine-title">Wednesday – Training Day Fuel</h2>
-                    <div class="meal-block"><div class="meal-time-title">Meal 1: Protein Latte</div><div class="step"><div class="step-header"><div id="wed-meal-1a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-1b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Unsweetened Almond Milk</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 2: Girly Macro Bowl</div><div class="step"><div class="step-header"><div id="wed-meal-2a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Grilled Chicken Breast</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-2b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Quinoa</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-2c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Spinach, Tomatoes, Cucumber</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 3: Pre-Workout Fuel</div><div class="step"><div class="step-header"><div id="wed-meal-3a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2 Brown Rice Cakes</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-3b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2 tbsp Powdered Peanut Butter</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-3c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 medium Banana</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 4: Post-Workout Recovery</div><div class="step"><div class="step-header"><div id="wed-meal-4a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Baked Salmon</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-4b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 medium Sweet Potato</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-4c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Steamed Broccoli</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 5: Evening Snack</div><div class="step"><div class="step-header"><div id="wed-meal-5a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1.5 cups Greek Yogurt</div></div></div><div class="step"><div class="step-header"><div id="wed-meal-5b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/2 cup Mixed Berries</div></div></div></div>
+            <div id="thursday-meals" class="day-content">
+                <div class="day-section">
+                    <h2 class="routine-title">Thursday – Rest Day Fuel Plan</h2>
+                    <div class="routine-purpose"><strong>Totals:</strong> ~1500 Calories | 212g Protein | 40g Carbs | 54g Fat</div>
+                     <div class="section-block meal-block"><div class="section-block-title meal-1-title">Meal 1: Protein Latte</div><div class="item step"><div class="step-header"><div id="thu-meal-1-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div><div class="item step"><div class="step-header"><div id="thu-meal-1-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Unsweetened Almond Milk: 1 cup (240ml)</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-2-title">Meal 2: Big Girly Salad</div><div class="item step"><div class="step-header"><div id="thu-meal-2-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Grilled Chicken Breast: 7 oz (200g)</div><div class="step-info">~320 cal</div></div></div><div class="item step"><div class="step-header"><div id="thu-meal-2-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div><div class="step-info">~40 cal</div></div></div><div class="item step"><div class="step-header"><div id="thu-meal-2-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Avocado: 1/4 medium</div><div class="step-info">~80 cal</div></div></div><div class="item step"><div class="step-header"><div id="thu-meal-2-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Light Vinaigrette: 2 tbsp (30ml)</div><div class="step-info">~60 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-3-title">Meal 3: High-Protein Mousse</div><div class="item step"><div class="step-header"><div id="thu-meal-3-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Non-Fat Greek Yogurt: 1.5 cups (340g)</div><div class="step-info">~195 cal</div></div></div><div class="item step"><div class="step-header"><div id="thu-meal-3-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1/2 scoop (17g)</div><div class="step-info">~65 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-4-title">Meal 4: Lean & Green</div><div class="item step"><div class="step-header"><div id="thu-meal-4-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Baked Cod: 8 oz (227g)</div><div class="step-info">~210 cal</div></div></div><div class="item step"><div class="step-header"><div id="thu-meal-4-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Olive Oil: 1 tbsp (15ml)</div><div class="step-info">~120 cal</div></div></div><div class="item step"><div class="step-header"><div id="thu-meal-4-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus: 1 bunch</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-5-title">Meal 5: Final Protein Hit</div><div class="item step"><div class="step-header"><div id="thu-meal-5-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div></div>
+                 </div>
+            </div>
+
+            <div id="friday-meals" class="day-content">
+                <div class="day-section">
+                    <h2 class="routine-title">Friday – Training Day Fuel Plan</h2>
+                    <div class="routine-purpose"><strong>Totals:</strong> ~1870 Calories | 190g Protein | 165g Carbs | 50g Fat</div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-1-title">Meal 1: Protein Latte</div><div class="item step"><div class="step-header"><div id="fri-meal-1-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-1-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Unsweetened Almond Milk: 1 cup (240ml)</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-2-title">Meal 2: Girly Macro Bowl</div><div class="item step"><div class="step-header"><div id="fri-meal-2-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Grilled Chicken Breast: 7 oz (200g)</div><div class="step-info">~320 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-2-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Quinoa, cooked: 1 cup (185g)</div><div class="step-info">~220 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-2-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Spinach, Tomatoes, Cucumber</div><div class="step-info">~20 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-2-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Light Vinaigrette: 2 tbsp (30ml)</div><div class="step-info">~60 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-3-title">Meal 3: Pre-Workout Fuel</div><div class="item step"><div class="step-header"><div id="fri-meal-3-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Brown Rice Cakes: 2 cakes</div><div class="step-info">~140 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-3-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Powdered Peanut Butter: 2 tbsp (16g)</div><div class="step-info">~70 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-3-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Medium Banana: 1</div><div class="step-info">~105 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-4-title">Meal 4: Post-Workout Recovery</div><div class="item step"><div class="step-header"><div id="fri-meal-4-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Baked Salmon: 7 oz (200g)</div><div class="step-info">~400 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-4-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Sweet Potato, baked: 1 medium</div><div class="step-info">~115 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-4-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Steamed Broccoli: 1 cup</div><div class="step-info">~30 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-5-title">Meal 5: Evening Snack</div><div class="item step"><div class="step-header"><div id="fri-meal-5-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Non-Fat Greek Yogurt: 1.5 cups (340g)</div><div class="step-info">~195 cal</div></div></div><div class="item step"><div class="step-header"><div id="fri-meal-5-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Berries: 1/2 cup</div><div class="step-info">~30 cal</div></div></div></div>
                 </div>
             </div>
-            
-            <div id="thursday-meals" class="day-content meals">
-                <div class="meal-section"><h2 class="routine-title">Thursday – Rest Day Fuel</h2>
-                    <div class="meal-block"><div class="meal-time-title">Meal 1: Protein Latte</div><div class="step"><div class="step-header"><div id="thu-meal-1a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey</div></div></div><div class="step"><div class="step-header"><div id="thu-meal-1b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Unsweetened Almond Milk</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 2: Big Girly Salad</div><div class="step"><div class="step-header"><div id="thu-meal-2a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Grilled Chicken Breast</div></div></div><div class="step"><div class="step-header"><div id="thu-meal-2b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div></div></div><div class="step"><div class="step-header"><div id="thu-meal-2c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/4 Avocado</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 3: Chocolate Mousse</div><div class="step"><div class="step-header"><div id="thu-meal-3a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1.5 cups Greek Yogurt</div></div></div><div class="step"><div class="step-header"><div id="thu-meal-3b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/2 scoop Rule One Whey</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 4: Lean & Green Dinner</div><div class="step"><div class="step-header"><div id="thu-meal-4a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">8 oz Baked Cod</div></div></div><div class="step"><div class="step-header"><div id="thu-meal-4b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 tbsp Olive Oil</div></div></div><div class="step"><div class="step-header"><div id="thu-meal-4c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 5: Final Protein Hit</div><div class="step"><div class="step-header"><div id="thu-meal-5a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey Shake</div></div></div></div>
-                </div>
+
+             <div id="saturday-meals" class="day-content">
+                <div class="day-section">
+                    <h2 class="routine-title">Saturday – Rest Day Fuel Plan</h2>
+                    <div class="routine-purpose"><strong>Totals:</strong> ~1500 Calories | 212g Protein | 40g Carbs | 54g Fat</div>
+                     <div class="section-block meal-block"><div class="section-block-title meal-1-title">Meal 1: Protein Latte</div><div class="item step"><div class="step-header"><div id="sat-meal-1-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div><div class="item step"><div class="step-header"><div id="sat-meal-1-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Unsweetened Almond Milk: 1 cup (240ml)</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-2-title">Meal 2: Big Girly Salad</div><div class="item step"><div class="step-header"><div id="sat-meal-2-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Grilled Chicken Breast: 7 oz (200g)</div><div class="step-info">~320 cal</div></div></div><div class="item step"><div class="step-header"><div id="sat-meal-2-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div><div class="step-info">~40 cal</div></div></div><div class="item step"><div class="step-header"><div id="sat-meal-2-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Avocado: 1/4 medium</div><div class="step-info">~80 cal</div></div></div><div class="item step"><div class="step-header"><div id="sat-meal-2-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Light Vinaigrette: 2 tbsp (30ml)</div><div class="step-info">~60 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-3-title">Meal 3: High-Protein Mousse</div><div class="item step"><div class="step-header"><div id="sat-meal-3-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Non-Fat Greek Yogurt: 1.5 cups (340g)</div><div class="step-info">~195 cal</div></div></div><div class="item step"><div class="step-header"><div id="sat-meal-3-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1/2 scoop (17g)</div><div class="step-info">~65 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-4-title">Meal 4: Lean & Green</div><div class="item step"><div class="step-header"><div id="sat-meal-4-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Baked Cod: 8 oz (227g)</div><div class="step-info">~210 cal</div></div></div><div class="item step"><div class="step-header"><div id="sat-meal-4-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Olive Oil: 1 tbsp (15ml)</div><div class="step-info">~120 cal</div></div></div><div class="item step"><div class="step-header"><div id="sat-meal-4-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus: 1 bunch</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-5-title">Meal 5: Final Protein Hit</div><div class="item step"><div class="step-header"><div id="sat-meal-5-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div></div>
+                 </div>
             </div>
-            
-            <div id="friday-meals" class="day-content meals">
-                <div class="meal-section"><h2 class="routine-title">Friday – Training Day Fuel</h2>
-                    <div class="meal-block"><div class="meal-time-title">Meal 1: Protein Latte</div><div class="step"><div class="step-header"><div id="fri-meal-1a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-1b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Unsweetened Almond Milk</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 2: Girly Macro Bowl</div><div class="step"><div class="step-header"><div id="fri-meal-2a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Grilled Chicken Breast</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-2b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Quinoa</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-2c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Spinach, Tomatoes, Cucumber</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 3: Pre-Workout Fuel</div><div class="step"><div class="step-header"><div id="fri-meal-3a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2 Brown Rice Cakes</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-3b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">2 tbsp Powdered Peanut Butter</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-3c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 medium Banana</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 4: Post-Workout Recovery</div><div class="step"><div class="step-header"><div id="fri-meal-4a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Baked Salmon</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-4b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 medium Sweet Potato</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-4c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Steamed Broccoli</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 5: Evening Snack</div><div class="step"><div class="step-header"><div id="fri-meal-5a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1.5 cups Greek Yogurt</div></div></div><div class="step"><div class="step-header"><div id="fri-meal-5b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/2 cup Mixed Berries</div></div></div></div>
-                </div>
+
+            <div id="sunday-meals" class="day-content">
+                <div class="day-section">
+                    <h2 class="routine-title">Sunday – Rest Day Fuel Plan</h2>
+                    <div class="routine-purpose"><strong>Totals:</strong> ~1500 Calories | 212g Protein | 40g Carbs | 54g Fat</div>
+                     <div class="section-block meal-block"><div class="section-block-title meal-1-title">Meal 1: Protein Latte</div><div class="item step"><div class="step-header"><div id="sun-meal-1-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div><div class="item step"><div class="step-header"><div id="sun-meal-1-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Unsweetened Almond Milk: 1 cup (240ml)</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-2-title">Meal 2: Big Girly Salad</div><div class="item step"><div class="step-header"><div id="sun-meal-2-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Grilled Chicken Breast: 7 oz (200g)</div><div class="step-info">~320 cal</div></div></div><div class="item step"><div class="step-header"><div id="sun-meal-2-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div><div class="step-info">~40 cal</div></div></div><div class="item step"><div class="step-header"><div id="sun-meal-2-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Avocado: 1/4 medium</div><div class="step-info">~80 cal</div></div></div><div class="item step"><div class="step-header"><div id="sun-meal-2-4" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Light Vinaigrette: 2 tbsp (30ml)</div><div class="step-info">~60 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-3-title">Meal 3: High-Protein Mousse</div><div class="item step"><div class="step-header"><div id="sun-meal-3-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Non-Fat Greek Yogurt: 1.5 cups (340g)</div><div class="step-info">~195 cal</div></div></div><div class="item step"><div class="step-header"><div id="sun-meal-3-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1/2 scoop (17g)</div><div class="step-info">~65 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-4-title">Meal 4: Lean & Green</div><div class="item step"><div class="step-header"><div id="sun-meal-4-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Baked Cod: 8 oz (227g)</div><div class="step-info">~210 cal</div></div></div><div class="item step"><div class="step-header"><div id="sun-meal-4-2" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Olive Oil: 1 tbsp (15ml)</div><div class="step-info">~120 cal</div></div></div><div class="item step"><div class="step-header"><div id="sun-meal-4-3" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus: 1 bunch</div><div class="step-info">~40 cal</div></div></div></div>
+                    <div class="section-block meal-block"><div class="section-block-title meal-5-title">Meal 5: Final Protein Hit</div><div class="item step"><div class="step-header"><div id="sun-meal-5-1" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Rule One Whey Protein: 1 scoop (33g)</div><div class="step-info">~130 cal</div></div></div></div>
+                 </div>
             </div>
-            
-            <div id="saturday-meals" class="day-content meals">
-                 <div class="meal-section"><h2 class="routine-title">Saturday – Rest Day Fuel</h2>
-                    <div class="meal-block"><div class="meal-time-title">Meal 1: Protein Latte</div><div class="step"><div class="step-header"><div id="sat-meal-1a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey</div></div></div><div class="step"><div class="step-header"><div id="sat-meal-1b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Unsweetened Almond Milk</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 2: Big Girly Salad</div><div class="step"><div class="step-header"><div id="sat-meal-2a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Grilled Chicken Breast</div></div></div><div class="step"><div class="step-header"><div id="sat-meal-2b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div></div></div><div class="step"><div class="step-header"><div id="sat-meal-2c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/4 Avocado</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 3: Chocolate Mousse</div><div class="step"><div class="step-header"><div id="sat-meal-3a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1.5 cups Greek Yogurt</div></div></div><div class="step"><div class="step-header"><div id="sat-meal-3b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/2 scoop Rule One Whey</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 4: Lean & Green Dinner</div><div class="step"><div class="step-header"><div id="sat-meal-4a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">8 oz Baked Cod</div></div></div><div class="step"><div class="step-header"><div id="sat-meal-4b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 tbsp Olive Oil</div></div></div><div class="step"><div class="step-header"><div id="sat-meal-4c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 5: Final Protein Hit</div><div class="step"><div class="step-header"><div id="sat-meal-5a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey Shake</div></div></div></div>
-                </div>
-            </div>
-            
-            <div id="sunday-meals" class="day-content meals">
-                 <div class="meal-section"><h2 class="routine-title">Sunday – Rest Day Fuel</h2>
-                    <div class="meal-block"><div class="meal-time-title">Meal 1: Protein Latte</div><div class="step"><div class="step-header"><div id="sun-meal-1a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey</div></div></div><div class="step"><div class="step-header"><div id="sun-meal-1b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 cup Unsweetened Almond Milk</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 2: Big Girly Salad</div><div class="step"><div class="step-header"><div id="sun-meal-2a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">7 oz Grilled Chicken Breast</div></div></div><div class="step"><div class="step-header"><div id="sun-meal-2b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Mixed Greens, Peppers, Onion</div></div></div><div class="step"><div class="step-header"><div id="sun-meal-2c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/4 Avocado</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 3: Chocolate Mousse</div><div class="step"><div class="step-header"><div id="sun-meal-3a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1.5 cups Greek Yogurt</div></div></div><div class="step"><div class="step-header"><div id="sun-meal-3b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1/2 scoop Rule One Whey</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 4: Lean & Green Dinner</div><div class="step"><div class="step-header"><div id="sun-meal-4a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">8 oz Baked Cod</div></div></div><div class="step"><div class="step-header"><div id="sun-meal-4b" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 tbsp Olive Oil</div></div></div><div class="step"><div class="step-header"><div id="sun-meal-4c" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">Roasted Asparagus</div></div></div></div>
-                    <div class="meal-block"><div class="meal-time-title">Meal 5: Final Protein Hit</div><div class="step"><div class="step-header"><div id="sun-meal-5a" class="step-checkbox" onclick="toggleCheckbox(this)"></div><div class="step-title">1 scoop Rule One Whey Shake</div></div></div></div>
-                </div>
-            </div>
+
         </div>
 
         <div id="history-toggle-section">
@@ -565,9 +571,8 @@
         </div>
 
         <div class="notice">
-            Progress automatically saves and resets at midnight.
+            Progress automatically saves and resets at midnight
         </div>
-
     </div>
     <script>
         // --- Global Error Handler ---
@@ -576,47 +581,46 @@
             return true; 
         };
 
-        // --- Constants & Initial State ---
+        // --- Constants ---
         const today = new Date();
         const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const dayOfWeek = today.getDay();
+        const dayOfWeek = today.getDay(); 
         const treatmentSchedule = { 0: 'slugging', 1: 'retinoid', 2: 'exfoliant', 3: 'retinoid', 4: 'exfoliant', 5: 'retinoid', 6: 'slugging' };
         const workoutSchedule = { 0: 'Rest & Prep', 1: 'Workout A', 2: 'Cardio/Corrective', 3: 'Workout B', 4: 'Cardio/Corrective', 5: 'Workout C', 6: 'Recovery' };
         const todaysRecommendedTreatment = treatmentSchedule[dayOfWeek];
         const todaysRecommendedWorkout = workoutSchedule[dayOfWeek];
 
+        // --- Global State Variables ---
         let currentSection = 'skincare';
         let currentRoutine = 'morning';
         let currentTreatment = todaysRecommendedTreatment;
         let currentWorkoutDay = dayNames[dayOfWeek].toLowerCase();
-        let currentMealsDay = dayNames[dayOfWeek].toLowerCase();
-        let completedSteps = {};
-        let workoutLocations = { monday: 'gym', wednesday: 'gym', friday: 'gym' };
+        let currentMealDay = dayNames[dayOfWeek].toLowerCase();
+        let completedSteps = {}; 
+        let workoutLocations = {};
 
+        // --- Storage Keys ---
         const STORAGE_KEYS = {
-            CURRENT_STATE: 'girly-tracker-current-state',
-            DAILY_SUMMARY_PREFIX: 'girly-tracker-summary-',
+            CURRENT_STATE: 'tracker-current-state',
+            DAILY_SUMMARY_PREFIX: 'tracker-daily-summary-',
+            LAST_SUMMARY_DATE: 'tracker-last-summary-date'
         };
 
-        // --- Utility Functions ---
+        // --- Date & Storage Helpers ---
         function getLocalDateString(date = new Date()) {
-            return date.toISOString().split('T')[0];
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         }
-
-        function saveToStorage(key, data) {
-            try { localStorage.setItem(key, JSON.stringify(data)); } catch (e) { console.warn(`LocalStorage save error:`, e); }
-        }
-
-        function loadFromStorage(key) {
-            try { const data = localStorage.getItem(key); return data ? JSON.parse(data) : null; } catch (e) { console.warn(`LocalStorage load error:`, e); return null; }
-        }
-
+        function saveToStorage(key, data) { try { localStorage.setItem(key, JSON.stringify(data)); } catch (e) { console.warn(`LocalStorage save error:`, e); }}
+        function loadFromStorage(key) { try { const data = localStorage.getItem(key); return data ? JSON.parse(data) : null; } catch (e) { console.warn(`LocalStorage load error:`, e); return null; }}
+        
         // --- State Management ---
         function saveCurrentState() {
             const stateToSave = {
-                lastSavedDate: getLocalDateString(),
-                completedSteps, currentSection, currentRoutine, currentTreatment,
-                currentWorkoutDay, currentMealsDay, workoutLocations
+                lastSavedDate: getLocalDateString(), completedSteps, currentSection, currentRoutine,
+                currentTreatment, currentWorkoutDay, currentMealDay, workoutLocations
             };
             saveToStorage(STORAGE_KEYS.CURRENT_STATE, stateToSave);
         }
@@ -632,16 +636,191 @@
                 currentRoutine = loadedState.currentRoutine || 'morning';
                 currentTreatment = loadedState.currentTreatment || todaysRecommendedTreatment;
                 currentWorkoutDay = loadedState.currentWorkoutDay || dayNames[dayOfWeek].toLowerCase();
-                currentMealsDay = loadedState.currentMealsDay || dayNames[dayOfWeek].toLowerCase();
+                currentMealDay = loadedState.currentMealDay || dayNames[dayOfWeek].toLowerCase();
                 workoutLocations = { ...defaultLocations, ...(loadedState.workoutLocations || {}) };
             } else {
                 completedSteps = {};
                 workoutLocations = defaultLocations;
-                saveCurrentState(); // Save fresh default state for today
             }
+            Object.keys(completedSteps).forEach(stepId => {
+                const checkbox = document.getElementById(stepId);
+                if (checkbox) {
+                    checkbox.classList.add('checked');
+                    checkbox.innerHTML = '✓';
+                }
+            });
+        }
+
+        // --- Summary & History ---
+        function calculateSummaryPercentages(state) {
+            const { completedSteps: steps, currentTreatment: treatment, currentWorkoutDay: workoutDay, currentMealDay: mealDay, workoutLocations: locations } = state;
+            const safeSteps = steps || {};
+            
+            const morningStepsIds = ['morning-cleanse', 'morning-vitaminc', 'morning-moisturize', 'morning-sunscreen'];
+            const morningPercent = Math.round((morningStepsIds.filter(id => safeSteps[id]).length / morningStepsIds.length) * 100);
+
+            let eveningStepsIds = ['evening-cleanse', 'evening-hydration', 'evening-moisturize'];
+            if (treatment === 'retinoid') eveningStepsIds.push('evening-treatment');
+            else if (treatment === 'exfoliant') eveningStepsIds.push('evening-treatment-exfoliant');
+            else if (treatment === 'slugging') eveningStepsIds.push('evening-treatment-slugging', 'evening-slug');
+            const eveningPercent = eveningStepsIds.length > 0 ? Math.round((eveningStepsIds.filter(id => safeSteps[id]).length / eveningStepsIds.length) * 100) : 0;
+            
+            let workoutPercent = 0;
+            const workoutContainer = document.getElementById(`${workoutDay}-workout`);
+            if (workoutContainer) {
+                const relevantCheckboxes = Array.from(workoutContainer.querySelectorAll('.step-checkbox')).filter(box => {
+                    const parentBlock = box.closest('.exercise-block');
+                    return !parentBlock || parentBlock.classList.contains('active');
+                });
+                workoutPercent = relevantCheckboxes.length > 0 ? Math.round((relevantCheckboxes.filter(box => safeSteps[box.id]).length / relevantCheckboxes.length) * 100) : 0;
+            }
+            
+            let mealsPercent = 0;
+            const mealContainer = document.getElementById(`${mealDay}-meals`);
+            if(mealContainer) {
+                const mealCheckboxes = mealContainer.querySelectorAll('.step-checkbox');
+                mealsPercent = mealCheckboxes.length > 0 ? Math.round((Array.from(mealCheckboxes).filter(box => safeSteps[box.id]).length / mealCheckboxes.length) * 100) : 0;
+            }
+
+            return {
+                skincare: { morningPercent, eveningPercent, treatment },
+                workout: { day: workoutDay, location: locations[workoutDay] || 'N/A', percent: workoutPercent },
+                meals: { day: mealDay, percent: mealsPercent }
+            };
+        }
+
+        function saveDailySummary(dateStrToSave, summaryState) {
+             const summaryKey = `${STORAGE_KEYS.DAILY_SUMMARY_PREFIX}${dateStrToSave}`;
+             const lastSummaryDate = loadFromStorage(STORAGE_KEYS.LAST_SUMMARY_DATE);
+             if (lastSummaryDate === dateStrToSave) return;
+             
+             const percentages = calculateSummaryPercentages(summaryState);
+             saveToStorage(summaryKey, percentages);
+             saveToStorage(STORAGE_KEYS.LAST_SUMMARY_DATE, dateStrToSave);
+        }
+
+        function checkForSummarySave() {
+             const todayStr = getLocalDateString();
+             const currentState = loadFromStorage(STORAGE_KEYS.CURRENT_STATE);
+             if (currentState?.lastSavedDate && currentState.lastSavedDate !== todayStr) {
+                 const dateToSummarize = currentState.lastSavedDate;
+                 const summaryKey = `${STORAGE_KEYS.DAILY_SUMMARY_PREFIX}${dateToSummarize}`;
+                 if (!loadFromStorage(summaryKey)) {
+                     saveDailySummary(dateToSummarize, currentState);
+                 }
+             }
+        }
+
+        function displayHistory() {
+             const dateInput = document.getElementById('history-date-input');
+             const selectedDateStr = dateInput.value;
+             if (!selectedDateStr) { alert("Please select a date."); return; }
+             
+             const noDataMsg = document.getElementById('history-no-data');
+             const skincareDiv = document.getElementById('history-skincare-summary');
+             const workoutDiv = document.getElementById('history-workout-summary');
+             const mealsDiv = document.getElementById('history-meals-summary');
+
+             skincareDiv.innerHTML = ''; workoutDiv.innerHTML = ''; mealsDiv.innerHTML = '';
+             noDataMsg.classList.add('hidden');
+             document.getElementById('history-display-title').textContent = `Progress History for ${selectedDateStr}`;
+
+             let dataFound = false;
+             const dailySummary = loadFromStorage(`${STORAGE_KEYS.DAILY_SUMMARY_PREFIX}${selectedDateStr}`);
+             if (dailySummary) {
+                 dataFound = true;
+                 const workoutDayName = dayNames.find(d => d.toLowerCase() === dailySummary.workout?.day) || 'N/A';
+                 const mealDayName = dayNames.find(d => d.toLowerCase() === dailySummary.meals?.day) || 'N/A';
+                 skincareDiv.innerHTML = `<div class="history-summary-section"><div class="history-summary-title">💧 Skincare</div><div class="history-summary-details">Morning: ${dailySummary.skincare?.morningPercent}% | Evening: ${dailySummary.skincare?.eveningPercent}% | Treatment: ${dailySummary.skincare?.treatment}</div></div>`;
+                 workoutDiv.innerHTML = `<div class="history-summary-section"><div class="history-summary-title">💪 Workout (${workoutDayName})</div><div class="history-summary-details">Location: ${dailySummary.workout?.location} | Completion: ${dailySummary.workout?.percent}%</div></div>`;
+                 mealsDiv.innerHTML = `<div class="history-summary-section"><div class="history-summary-title">🍽️ Meals (${mealDayName})</div><div class="history-summary-details">Adherence: ${dailySummary.meals?.percent}%</div></div>`;
+             }
+
+             if (!dataFound) noDataMsg.classList.remove('hidden');
+             document.getElementById('history-display-section').classList.remove('hidden');
+             document.getElementById('history-toggle-btn').textContent = '🔼 Hide History';
+        }
+
+
+        // --- UI Setup & Switching Functions ---
+        function setupHeader() {
+            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+            document.getElementById('today-recommendation').innerHTML = `Today: <b>${dayNames[dayOfWeek]} (${todaysRecommendedWorkout})</b> — Skincare: <b>${todaysRecommendedTreatment.charAt(0).toUpperCase() + todaysRecommendedTreatment.slice(1)}</b>`;
+            document.getElementById(`${todaysRecommendedTreatment}-schedule`)?.classList.add('highlighted');
+        }
+
+        function switchMainTab(section) {
+            document.querySelectorAll('.main-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(`${section}-main-tab`).classList.add('active');
+            document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(`${section}-section`).classList.add('active');
+            currentSection = section;
+
+            if (section === 'skincare') switchRoutine(currentRoutine);
+            else if (section === 'workout') setActiveDay(currentWorkoutDay, 'workout');
+            else if (section === 'meals') setActiveDay(currentMealDay, 'meals');
+
+            updateProgress();
+            saveCurrentState();
+        }
+
+        function switchRoutine(routine) {
+            document.getElementById('morning-tab').className = `tab ${routine === 'morning' ? 'active-morning' : 'inactive'}`;
+            document.getElementById('evening-tab').className = `tab ${routine === 'evening' ? 'active-evening' : 'inactive'}`;
+            document.getElementById('morning-routine').classList.toggle('hidden', routine !== 'morning');
+            document.getElementById('evening-routine').classList.toggle('hidden', routine !== 'evening');
+            currentRoutine = routine;
+            if (routine === 'evening') selectTreatment(currentTreatment);
+            updateProgress();
+            saveCurrentState();
         }
         
-        // --- Checkbox & Progress ---
+        function setActiveDay(dayName, type) {
+            document.querySelectorAll(`.${type === 'workout' ? 'workout-active' : 'meals-active'}`).forEach(t => t.classList.remove(`${type === 'workout' ? 'workout-active' : 'meals-active'}`));
+            document.querySelectorAll('.day-tab').forEach(tab => tab.classList.remove('workout-active', 'meals-active'));
+            document.getElementById(`${dayName}-${type === 'workout' ? '' : 'meal-'}tab`).classList.add(`${type === 'workout' ? 'workout-active' : 'meals-active'}`);
+            
+            document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${dayName}-${type === 'workout' ? 'workout' : 'meals'}`).classList.add('active');
+            
+            if (type === 'workout') {
+                currentWorkoutDay = dayName;
+                updateLocationToggleUI(dayName, workoutLocations[dayName]);
+            } else {
+                currentMealDay = dayName;
+            }
+            updateProgress();
+            saveCurrentState();
+        }
+
+        function selectTreatment(treatment) {
+            currentTreatment = treatment;
+            document.querySelectorAll('.treatment-btn').forEach(btn => btn.classList.toggle('active', btn.id === `${treatment}-btn`));
+            document.getElementById('retinoid-step').classList.toggle('hidden', treatment !== 'retinoid');
+            document.getElementById('exfoliant-step').classList.toggle('hidden', treatment !== 'exfoliant');
+            document.getElementById('slugging-step').classList.toggle('hidden', treatment !== 'slugging');
+            document.getElementById('evening-slug').classList.toggle('hidden', treatment !== 'slugging');
+            updateProgress();
+            saveCurrentState();
+        }
+
+        function switchWorkoutLocation(dayName, location) {
+            workoutLocations[dayName] = location;
+            updateLocationToggleUI(dayName, location);
+            updateProgress();
+            saveCurrentState();
+        }
+
+        function updateLocationToggleUI(dayName, location) {
+            document.getElementById(`${dayName}-toggle-gym`)?.classList.toggle('active', location === 'gym');
+            document.getElementById(`${dayName}-toggle-home`)?.classList.toggle('active', location === 'home');
+            document.getElementById(`${dayName}-gym-exercises`)?.classList.toggle('hidden', location !== 'gym');
+            document.getElementById(`${dayName}-gym-exercises`)?.classList.toggle('active', location === 'gym');
+            document.getElementById(`${dayName}-home-exercises`)?.classList.toggle('hidden', location !== 'home');
+            document.getElementById(`${dayName}-home-exercises`)?.classList.toggle('active', location === 'home');
+        }
+
+        // --- Progress and State Management ---
         function toggleCheckbox(element) {
             const stepId = element.id;
             const isChecked = element.classList.toggle('checked');
@@ -659,161 +838,80 @@
                     relevantStepIds = ['morning-cleanse', 'morning-vitaminc', 'morning-moisturize', 'morning-sunscreen'];
                 } else {
                     relevantStepIds = ['evening-cleanse', 'evening-hydration', 'evening-moisturize'];
-                    if (currentTreatment === 'retinoid') relevantStepIds.push('evening-treatment-retinoid');
+                    if (currentTreatment === 'retinoid') relevantStepIds.push('evening-treatment');
                     else if (currentTreatment === 'exfoliant') relevantStepIds.push('evening-treatment-exfoliant');
-                    else if (currentTreatment === 'slugging') relevantStepIds.push('evening-treatment-slugging', 'evening-slugging');
+                    else if (currentTreatment === 'slugging') relevantStepIds.push('evening-treatment-slugging', 'evening-slug');
                 }
             } else if (currentSection === 'workout') {
-                const workoutContainer = document.getElementById(`${currentWorkoutDay}-workout`);
-                if (workoutContainer) {
-                    const activeCheckboxes = Array.from(workoutContainer.querySelectorAll('.step-checkbox')).filter(box => {
+                const container = document.getElementById(`${currentWorkoutDay}-workout`);
+                if (container) {
+                    const activeCheckboxes = Array.from(container.querySelectorAll('.step-checkbox')).filter(box => {
                         const parentBlock = box.closest('.exercise-block');
                         return !parentBlock || parentBlock.classList.contains('active');
                     });
                     relevantStepIds = activeCheckboxes.map(el => el.id);
                 }
             } else if (currentSection === 'meals') {
-                const mealsContainer = document.getElementById(`${currentMealsDay}-meals`);
-                if (mealsContainer) {
-                    relevantStepIds = Array.from(mealsContainer.querySelectorAll('.step-checkbox')).map(el => el.id);
-                }
+                const container = document.getElementById(`${currentMealDay}-meals`);
+                if(container) relevantStepIds = Array.from(container.querySelectorAll('.step-checkbox')).map(el => el.id);
             }
-
             const totalSteps = relevantStepIds.length;
             const completedCount = relevantStepIds.filter(stepId => completedSteps[stepId]).length;
             const progressPercentage = totalSteps > 0 ? Math.round((completedCount / totalSteps) * 100) : 0;
             document.getElementById('progress-percentage').textContent = `${progressPercentage}%`;
             document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
         }
-        
-        // --- UI Switching ---
-        function switchMainTab(section) {
-            document.querySelectorAll('.main-tab').forEach(tab => tab.classList.remove('active'));
-            document.getElementById(`${section}-main-tab`)?.classList.add('active');
-            document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(`${section}-section`)?.classList.add('active');
-            currentSection = section;
 
-            if (section === 'skincare') switchRoutine(currentRoutine);
-            else if (section === 'workout') setActiveDay(currentWorkoutDay, 'workout');
-            else if (section === 'meals') setActiveDay(currentMealsDay, 'meals');
-
-            updateProgress();
-            saveCurrentState();
-        }
-
-        function switchRoutine(routine) {
-            document.getElementById('morning-tab').className = `tab ${routine === 'morning' ? 'active-morning' : 'inactive'}`;
-            document.getElementById('evening-tab').className = `tab ${routine === 'evening' ? 'active-evening' : 'inactive'}`;
-            document.getElementById('morning-routine').classList.toggle('hidden', routine !== 'morning');
-            document.getElementById('evening-routine').classList.toggle('hidden', routine !== 'evening');
-            currentRoutine = routine;
-            if (routine === 'evening') selectTreatment(currentTreatment); // Ensure correct treatment view
-            updateProgress();
-            saveCurrentState();
-        }
-
-        function setActiveDay(dayName, type) {
-            const dayTabs = document.querySelectorAll(`#${type}-section .day-tab`);
-            dayTabs.forEach(tab => tab.classList.remove('active'));
-            document.getElementById(`${dayName}-${type}-tab`)?.classList.add('active');
-            
-            const dayContents = document.querySelectorAll(`.${type}.day-content`);
-            dayContents.forEach(content => content.classList.remove('active'));
-            document.getElementById(`${dayName}-${type}`)?.classList.add('active');
-
-            if (type === 'workout') {
-                currentWorkoutDay = dayName;
-                updateLocationToggleUI(dayName, workoutLocations[dayName]);
-            } else if (type === 'meals') {
-                currentMealsDay = dayName;
+        function toggleHistory() {
+            const historySection = document.getElementById('history-display-section');
+            const historyBtn = document.getElementById('history-toggle-btn');
+            const isHidden = historySection.classList.toggle('hidden');
+            historyBtn.textContent = isHidden ? '📊 Show History' : '🔼 Hide History';
+            if (!isHidden) {
+               const dateInput = document.getElementById('history-date-input');
+               if (!dateInput.value) dateInput.value = getLocalDateString();
             }
-            updateProgress();
-            saveCurrentState();
-        }
-
-        function selectTreatment(treatment) {
-            currentTreatment = treatment;
-            document.querySelectorAll('.treatment-btn').forEach(btn => btn.classList.toggle('active', btn.id === `${treatment}-btn`));
-            document.getElementById('retinoid-step').classList.toggle('hidden', treatment !== 'retinoid');
-            document.getElementById('exfoliant-step').classList.toggle('hidden', treatment !== 'exfoliant');
-            document.getElementById('slugging-step').classList.toggle('hidden', treatment !== 'slugging');
-            document.getElementById('evening-slug').classList.toggle('hidden', treatment !== 'slugging');
-            updateProgress();
-            saveCurrentState();
-        }
-        
-        function switchWorkoutLocation(dayName, location) {
-            workoutLocations[dayName] = location;
-            updateLocationToggleUI(dayName, location);
-            updateProgress();
-            saveCurrentState();
-        }
-
-        function updateLocationToggleUI(dayName, location) {
-            const dayContainer = document.getElementById(`${dayName}-workout`);
-            if (!dayContainer) return;
-
-            dayContainer.querySelector(`#${dayName}-toggle-gym`)?.classList.toggle('active', location === 'gym');
-            dayContainer.querySelector(`#${dayName}-toggle-home`)?.classList.toggle('active', location === 'home');
-            dayContainer.querySelector(`#${dayName}-gym-exercises`)?.classList.toggle('hidden', location !== 'gym');
-            dayContainer.querySelector(`#${dayName}-gym-exercises`)?.classList.toggle('active', location === 'gym');
-            dayContainer.querySelector(`#${dayName}-home-exercises`)?.classList.toggle('hidden', location !== 'home');
-            dayContainer.querySelector(`#${dayName}-home-exercises`)?.classList.toggle('active', location === 'home');
         }
 
         // --- Initialization ---
-        function setupUI() {
-            // Restore checkbox visuals
-            Object.keys(completedSteps).forEach(stepId => {
-                const checkbox = document.getElementById(stepId);
-                if (checkbox && completedSteps[stepId]) {
-                    checkbox.classList.add('checked');
-                    checkbox.innerHTML = '✓';
-                }
-            });
-
-            // Set up header
-            document.getElementById('current-date').textContent = today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-            document.getElementById('today-recommendation').innerHTML = `Today: <b>${dayNames[dayOfWeek]} (${todaysRecommendedWorkout})</b> — Skincare: <b>${todaysRecommendedTreatment.charAt(0).toUpperCase() + todaysRecommendedTreatment.slice(1)}</b>`;
-            document.getElementById(`${todaysRecommendedTreatment}-schedule`)?.classList.add('highlighted');
-            
-            // Set initial active views
+        function initializeApp() {
+            checkForSummarySave();
+            loadCurrentState();
+            setupHeader();
             switchMainTab(currentSection);
+            updateProgress();
         }
 
         function attachEventListeners() {
             document.getElementById('skincare-main-tab')?.addEventListener('click', () => switchMainTab('skincare'));
             document.getElementById('workout-main-tab')?.addEventListener('click', () => switchMainTab('workout'));
             document.getElementById('meals-main-tab')?.addEventListener('click', () => switchMainTab('meals'));
-            
             document.getElementById('morning-tab')?.addEventListener('click', () => switchRoutine('morning'));
             document.getElementById('evening-tab')?.addEventListener('click', () => switchRoutine('evening'));
-            
             document.getElementById('retinoid-btn')?.addEventListener('click', () => selectTreatment('retinoid'));
             document.getElementById('exfoliant-btn')?.addEventListener('click', () => selectTreatment('exfoliant'));
             document.getElementById('slugging-btn')?.addEventListener('click', () => selectTreatment('slugging'));
-
-            dayNames.forEach(day => {
-                const dayLower = day.toLowerCase();
-                document.getElementById(`${dayLower}-workout-tab`)?.addEventListener('click', () => setActiveDay(dayLower, 'workout'));
-                document.getElementById(`${dayLower}-meals-tab`)?.addEventListener('click', () => setActiveDay(dayLower, 'meals'));
+            dayNames.forEach((day, index) => {
+                document.getElementById(`${day.toLowerCase()}-tab`)?.addEventListener('click', () => setActiveDay(day.toLowerCase(), 'workout'));
+                document.getElementById(`${day.toLowerCase()}-meal-tab`)?.addEventListener('click', () => setActiveDay(day.toLowerCase(), 'meals'));
             });
-
             const daysWithToggles = ['monday', 'wednesday', 'friday'];
             daysWithToggles.forEach(day => {
                  document.getElementById(`${day}-toggle-gym`)?.addEventListener('click', () => switchWorkoutLocation(day, 'gym'));
                  document.getElementById(`${day}-toggle-home`)?.addEventListener('click', () => switchWorkoutLocation(day, 'home'));
             });
-
+            document.getElementById('load-history-btn')?.addEventListener('click', displayHistory);
+            document.getElementById('history-toggle-btn')?.addEventListener('click', toggleHistory);
             window.addEventListener('beforeunload', () => saveCurrentState());
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadCurrentState();
-            setupUI();
+            initializeApp();
             attachEventListeners();
         });
     </script>
 </body>
 </html>
+
+}
+Can you modify this to not have a home/gym option? I'll be going to the gym only from now on
